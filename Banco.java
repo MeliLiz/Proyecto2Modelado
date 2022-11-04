@@ -37,7 +37,7 @@ public class Banco implements ServicioBanco{
      * @param numCuentaDestino El numero de cuenta que recibirá el dinero
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
-    public boolean transferir(int numCuentaOrigen, int cvvOrigen, int numCuentaDestino){
+    public boolean transferir(int numCuentaOrigen, int cvvOrigen, int numCuentaDestino, double cantidad){
         return true;
     }
 
@@ -46,7 +46,7 @@ public class Banco implements ServicioBanco{
      * @param cuenta El numero de cuenta a comprobar
      * @return boolean true si la cuenta existe, false en otro caso
      */
-    private boolean existeCuenta(int cuenta){
+    public boolean existeCuenta(int cuenta){
         return true;
     }
 

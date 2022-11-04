@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.util.Set;
 
 /**
  * Clase que simula una tienda de libros
@@ -14,12 +15,12 @@ public class Tienda implements SujetoObservable{
     /**
      * Constructor
      */
-    public Tienda(){
+    public Tienda(PayMe payme){
         usuarios=new Hashtable<>();
         admin=new Hashtable<>();
         coleccion=new Coleccion();
-        payMe=new PayMe();
-        cuentaBancaria=0;////////////////////////////////////////////////////
+        payMe=payme;
+        cuentaBancaria=0;////////////////////////////////////////////////////Registrar la cuenta
         numLibros=coleccion.getNumLibros();
     }
 
@@ -28,7 +29,14 @@ public class Tienda implements SujetoObservable{
      * @return booleaan true si el usuario y contraseña son válidos, false en otro caso
      */
     public boolean verificarUsuario(String usuario, String contrasena){
-        return true;
+        Set<String> llaves = usuarios.keySet();
+
+        for(String llave: llaves){
+            if(llave.equals(usuario)&&usuarios.get(llave).getContrasena().equals(contrasena)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -36,41 +44,48 @@ public class Tienda implements SujetoObservable{
      * @return booleaan true si el usuario y contraseña son válidos, false en otro caso
      */
     public boolean verificarAdmmin(String usuario, String contrasena){
-        return true;
+        Set<String> llaves = admin.keySet();
+
+        for(String llave: llaves){
+            if(llave.equals(usuario)&&admin.get(llave).getContrasena().equals(contrasena)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Método para hacer el pago de una compra
+     * Método para hacer el pago de una compra, se transfiere dinero de la cuenta del usuario a la cuenta de la tienda
      * @return boolean true si el pago fue exitoso, false en otro caso
      */
-    public boolean hacerPago(double cantidad, int numCuentaCancaria, int cvv){
-        return true;
+    public boolean hacerPago(double cantidad, int numCuentaBancaria, int cvv){
+        return payMe.transferir(numCuentaBancaria, cvv, cuentaBancaria, cantidad);
     }
 
     /**
      * Método para verificar que exista una cuenta bancaria
      * @return
      */
-    public boolean existeCuentaBancaria(){
-        return true;
+    public boolean existeCuentaBancaria(int numCuentaBancaria){
+        return payMe.existeCuenta(numCuentaBancaria);
     }
 
     /**
      * Método para registrar a un cliente
      */
     @Override
-    public void registrar(Observador Usuario) {
-        // TODO Auto-generated method stub
-        
+    public void registrar(Usuario usuario) {
+        if(usuario!=null){
+            usuarios.put(usuario.getNombreUsuario(), usuario);
+        } 
     }
 
     /**
      * Método para remover a un cliente
      */
     @Override
-    public void remover(Observador usuario) {
-        // TODO Auto-generated method stub
-        
+    public void remover(Usuario usuario) {
+        usuarios.remove(usuario.getNombreUsuario());
     }
 
     /**
@@ -78,7 +93,10 @@ public class Tienda implements SujetoObservable{
      */
     @Override
     public void notificar() {
-        // TODO Auto-generated method stub
+        Set<String> llaves = usuarios.keySet();
+        for (String llave : llaves) {
+            usuarios.get(llave).actualizar();
+        }
         
     }
 }

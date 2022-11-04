@@ -3,21 +3,25 @@
  */
 public class PayMe {
     private Banco banco;
-    private double payMeCoins;
+
+    public PayMe(Banco banco){
+        this.banco=banco;
+    }
 
     /**
      * Método para saber si existe un número de cuenta registrado en el banco
      * @return boolean true si existe la cuenta, false en otro caso
      */
     public boolean existeCuenta(int numCuenta){
-        return true;
+        return banco.existeCuenta(numCuenta);
     }
 
     /**
      * Método para tranferir dinero de una cuenta a otra
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
-    public boolean transferir(int numCuentaOrigen, int cvvOrigen, int numCuentaDestino){
-        return true;
+    public boolean transferir(int numCuentaOrigen, int cvvOrigen, int numCuentaDestino, double cantidad){
+        return banco.transferir(numCuentaOrigen, cvvOrigen, numCuentaDestino, cantidad);
     }
+
 }

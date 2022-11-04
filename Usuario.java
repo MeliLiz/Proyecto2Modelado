@@ -16,6 +16,14 @@ public class Usuario implements Observador{
         return biblioteca;
     }
 
+    public String getNombreUsuario(){
+        return nombreUsuario;
+    }
+
+    public String getContrasena(){
+        return contrasena;
+    }
+
     public int getNumLibrosGratis(){
         return numLibrosGratis;
     }
