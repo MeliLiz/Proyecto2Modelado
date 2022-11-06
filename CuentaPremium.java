@@ -1,3 +1,7 @@
+/**
+ * Clase que simula una cuenta bancaria premium
+ * Este tipo de cuenta no tiene restricciones en depósitos ni retiros
+ */
 public class CuentaPremium extends CuentaBancaria {
 
     /**
@@ -16,7 +20,7 @@ public class CuentaPremium extends CuentaBancaria {
     /**
      * Método para depositar dinero en la cuenta
      * 
-     * @param cantidad La cantidad a depositar
+     * @param cantidad La cantidad a depositar, debe ser una cantidad positiva
      * @return True si la operación fue exitosa, false en otro caso
      */
     @Override
@@ -28,6 +32,11 @@ public class CuentaPremium extends CuentaBancaria {
         return true;
     }
 
+    /**
+     * Método para retirar dinero de la cuenta.
+     * @param cantidad La cantidad a depositar, debe ser una cantidad positiva
+     * @return boolean true si la operación fue exitosa, false en otro caso
+     */
     @Override
     public boolean retirar(double cantidad) {
         if (cantidad < 0 || cantidad > getSaldo()) {
