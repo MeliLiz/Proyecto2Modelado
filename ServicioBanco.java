@@ -9,7 +9,7 @@ public interface ServicioBanco {
      * @param beneficiario El nombre del beneficiario
      * @return La nueva cuenta creada
      */
-    public CuentaBancaria crearCuenta(String beneficiario);
+    public CuentaBancaria crearCuenta(String beneficiario, String tipoCuenta);
 
     /**
      * Método para consultar el saldo de una cuenta bancaria

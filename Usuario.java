@@ -1,11 +1,11 @@
 public class Usuario implements Observador{
     private String nombreUsuario;
     private String contrasena;
-    private int cuentaBancaria;
+    private long cuentaBancaria;
     private Biblioteca biblioteca;
     private int numLibrosGratis=0;
 
-    public Usuario(String usuario, String contrasena, int cuentaBancaria){
+    public Usuario(String usuario, String contrasena, long cuentaBancaria){
         nombreUsuario=usuario;
         this.contrasena=contrasena;
         this.cuentaBancaria=cuentaBancaria;

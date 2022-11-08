@@ -7,9 +7,11 @@ import java.util.Set;
  */
 public class Banco implements ServicioBanco {
     private Hashtable<Long, CuentaBancaria> cuentas;
+    private FabricaCuentas fabricaCuentas;
 
     public Banco() {
         cuentas = new Hashtable<Long, CuentaBancaria>();
+        fabricaCuentas=new FabricaCuentas();
     }
 
     /**
@@ -18,18 +20,16 @@ public class Banco implements ServicioBanco {
      * @param beneficiario El nombre del beneficiario
      * @return La nueva cuenta creada
      */
-    public CuentaBancaria crearCuenta(String beneficiario) {
+    public CuentaBancaria crearCuenta(String beneficiario, String tipoCuenta) {
         Random random = new Random();
         Long numCuenta = random.nextLong();
         while (existeCuenta(numCuenta)) {
             numCuenta = random.nextLong();
         }
         int cvv = random.nextInt(899) + 100;
-        // CuentaBancaria nuevaCuenta = new CuentaBancaria(beneficiario, numCuenta, cvv,
-        // 0);
-        // cuentas.put(numCuenta, nuevaCuenta);
-        // return nuevaCuenta;
-        return null;
+        CuentaBancaria cuenta=null;
+        cuenta=fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
+        return cuenta;
     }
 
     /**

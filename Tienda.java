@@ -6,7 +6,7 @@ import java.util.Set;
  */
 public class Tienda implements SujetoObservable {
     private Hashtable<String, Usuario> usuarios;
-    private Hashtable<String, Usuario> admin;
+    private Hashtable<String, Admin> admin;
     Coleccion coleccion;
     PayMe payMe;
     Long cuentaBancaria;
@@ -47,7 +47,7 @@ public class Tienda implements SujetoObservable {
      * @return booleaan true si el usuario y contraseña son válidos, false en otro
      *         caso
      */
-    public boolean verificarAdmmin(String usuario, String contrasena) {
+    public boolean verificarAdmin(String usuario, String contrasena) {
         Set<String> llaves = admin.keySet();
 
         for (String llave : llaves) {
@@ -78,6 +78,28 @@ public class Tienda implements SujetoObservable {
     }
 
     /**
+     * Método para verificar si un nombre de usuario ya está registrado
+     * @param nombreUsuario El nombre de usuario por verificar
+     * @return boolean true si ya existe el nombre de usuario, false en otro caso
+     */
+    public boolean existeNombreUsuario(String nombreUsuario){
+        Set<String> llavesAdmin = admin.keySet();
+        Set<String> llavesUsuarios=usuarios.keySet();
+
+        for (String llave : llavesAdmin) {
+            if (llave.equals(nombreUsuario)) {
+                return true;
+            }
+        }
+        for (String llave : llavesUsuarios) {
+            if (llave.equals(nombreUsuario)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Método para registrar a un cliente
      */
     @Override
@@ -105,5 +127,19 @@ public class Tienda implements SujetoObservable {
             usuarios.get(llave).actualizar();
         }
 
+    }
+
+    public void registrarAdmin(Admin nuevoAdmin){
+        admin.put(nuevoAdmin.getNombre(), nuevoAdmin);
+    }
+
+    public Usuario getUsuario(String nombreUsuario){
+        Set<String> llaves = usuarios.keySet();
+        for (String llave : llaves) {
+            if(llave.equals(nombreUsuario)){
+                return usuarios.get(llave);
+            }
+        }
+        return null;
     }
 }
