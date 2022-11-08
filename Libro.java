@@ -96,4 +96,13 @@ public class Libro {
         }
         return "Termiando";
     }
+
+    @Override
+    public String toString() {
+        return "\n" + "Nombre: " + this.nombre + "\n" +
+                "Autor: " + this.autor + "\n" +
+                "Genero: " + this.genero + "\n" +
+                "Precio: " + this.precio + "\n" +
+                "ID: " + this.ID + "\n";
+    }
 }

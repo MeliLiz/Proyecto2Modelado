@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Clase que contiene a los llibros de género Literario
  */
-public class Literario implements Genero{
+public class Literario implements Genero {
     private ArrayList<Libro> libros;
     private final String NOMBRE = "Literario";
 
@@ -17,6 +17,7 @@ public class Literario implements Genero{
 
     /**
      * Método para obtener la lista de libros del género Literario
+     * 
      * @return ArayList<Libro> La lista de libros de género Literario
      */
     public ArrayList<Libro> getLibros() {
@@ -25,6 +26,7 @@ public class Literario implements Genero{
 
     /**
      * Método para asignar los libros de género Literario
+     * 
      * @param libros El arraylist de los libros de género Literario
      */
     public void setLibros(ArrayList<Libro> libros) {
@@ -33,6 +35,7 @@ public class Literario implements Genero{
 
     /**
      * Método para agregar un libro a la lista de libros de género Literario
+     * 
      * @param libro El libro a agregar a la lista de libros de género Literario
      */
     public void addLibro(Libro libro) {
@@ -41,6 +44,7 @@ public class Literario implements Genero{
 
     /**
      * Método para eliminar un libro de la lista de libros de género Literario
+     * 
      * @param aEliminar El libro a eliminar de la lista del género Literario
      */
     public void eliminarLibro(Libro aEliminar) {
@@ -53,6 +57,7 @@ public class Literario implements Genero{
 
     /**
      * Método para obtener el nombre del género
+     * 
      * @return String El nombre del género
      */
     @Override
@@ -62,6 +67,7 @@ public class Literario implements Genero{
 
     /**
      * Método para obtener un iterador del género
+     * 
      * @return Iterator el iterador del género
      */
     @Override
@@ -71,10 +77,20 @@ public class Literario implements Genero{
 
     /**
      * Método para obtener el número de libros del género
+     * 
      * @return int El número de libros del género
      */
     @Override
     public int getNumeroDeLibros() {
         return libros.size();
+    }
+
+    @Override
+    public String toString() {
+        String libros = "";
+        for (Libro libro : this.libros) {
+            libros += libro;
+        }
+        return libros;
     }
 }
