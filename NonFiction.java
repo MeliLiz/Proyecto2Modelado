@@ -79,4 +79,13 @@ public class NonFiction implements Genero {
     public int getNumeroDeLibros() {
         return libros.size();
     }
+
+    @Override
+    public String toString() {
+        String libros = "";
+        for (Libro libro : this.libros) {
+            libros += libro;
+        }
+        return libros;
+    }
 }

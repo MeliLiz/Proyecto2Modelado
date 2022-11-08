@@ -79,12 +79,13 @@ public class Tienda implements SujetoObservable {
 
     /**
      * Método para verificar si un nombre de usuario ya está registrado
+     * 
      * @param nombreUsuario El nombre de usuario por verificar
      * @return boolean true si ya existe el nombre de usuario, false en otro caso
      */
-    public boolean existeNombreUsuario(String nombreUsuario){
+    public boolean existeNombreUsuario(String nombreUsuario) {
         Set<String> llavesAdmin = admin.keySet();
-        Set<String> llavesUsuarios=usuarios.keySet();
+        Set<String> llavesUsuarios = usuarios.keySet();
 
         for (String llave : llavesAdmin) {
             if (llave.equals(nombreUsuario)) {
@@ -129,17 +130,25 @@ public class Tienda implements SujetoObservable {
 
     }
 
-    public void registrarAdmin(Admin nuevoAdmin){
+    public void registrarAdmin(Admin nuevoAdmin) {
         admin.put(nuevoAdmin.getNombre(), nuevoAdmin);
     }
 
-    public Usuario getUsuario(String nombreUsuario){
+    public Usuario getUsuario(String nombreUsuario) {
         Set<String> llaves = usuarios.keySet();
         for (String llave : llaves) {
-            if(llave.equals(nombreUsuario)){
+            if (llave.equals(nombreUsuario)) {
                 return usuarios.get(llave);
             }
         }
         return null;
+    }
+
+    public String mostrarCatalogo() {
+        return coleccion.toString();
+    }
+
+    public Libro getLibro(int id) {
+        return coleccion.getLibro(id);
     }
 }
