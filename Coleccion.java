@@ -116,4 +116,18 @@ public class Coleccion implements Genero {
         return toString;
     }
 
+    @Override
+    public void addLibro(Libro libro){
+        if(libro!=null){
+            String genero=libro.getGenero();
+            if(genero.equals("educativo")){
+                listaGeneros.get(0).addLibro(libro);
+            }else if(genero.equals("literario")){
+                listaGeneros.get(1).addLibro(libro);
+            }else if(genero.equals("non-fiction")){
+                listaGeneros.get(2).addLibro(libro);
+            }
+        }
+    }
+
 }

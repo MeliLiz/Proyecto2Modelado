@@ -38,6 +38,7 @@ public class Educativo implements Genero {
      * 
      * @param libro El libro a agregar a la lista de libros de género Educativo
      */
+    @Override
     public void addLibro(Libro libro) {
         libros.add(libro);
     }
@@ -93,4 +94,5 @@ public class Educativo implements Genero {
         }
         return libros;
     }
+
 }

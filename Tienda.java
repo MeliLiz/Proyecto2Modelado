@@ -12,6 +12,7 @@ public class Tienda implements SujetoObservable {
     Long cuentaBancaria;
     int numLibros;
 
+
     /**
      * Constructor
      */
@@ -150,5 +151,17 @@ public class Tienda implements SujetoObservable {
 
     public Libro getLibro(int id) {
         return coleccion.getLibro(id);
+    }
+
+    public int getNumLibros() {
+        return this.numLibros;
+    }
+
+    public void setNumLibros(int numLibros) {
+        this.numLibros = numLibros;
+    }
+
+    public void addLibro(Libro libro){
+        coleccion.addLibro(libro);
     }
 }

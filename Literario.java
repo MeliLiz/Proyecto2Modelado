@@ -38,6 +38,7 @@ public class Literario implements Genero {
      * 
      * @param libro El libro a agregar a la lista de libros de género Literario
      */
+    @Override
     public void addLibro(Libro libro) {
         libros.add(libro);
     }

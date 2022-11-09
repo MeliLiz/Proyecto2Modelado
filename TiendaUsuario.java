@@ -120,22 +120,81 @@ public class TiendaUsuario {
      * Método para ir a la biblioteca de libros que tiene el usuario
      */
     public void irABiblioteca() {
-
+        vistaMenus.quererLeer();
+        
     }
 
-    /**
-     * Método para salir del menú en que se encuentra el usuario
-     */
-    public void salir() {
-
+    public void verBiblioteca(int respuesta){
+        if(respuesta==1){
+            Biblioteca biblioteca=usuario.getBiblioteca();
+            vistaTienda.mostrarLibrosBiblioteca(biblioteca);
+            vistaMenus.opcionesLectura();
+        }else{
+            inicio();
+        }
+        
     }
+
+    public void getLibro(int id){
+        Libro libro=usuario.getBiblioteca().getLibro(id);
+        if(libro!=null){
+            int respuesta=vistaMenus.opcionesLectura();
+            Biblioteca biblioteca=usuario.getBiblioteca();
+            switch (respuesta) {
+               
+                case 1:
+                    if(libro.getEstadoLibro().equals("Por leer")){
+                        biblioteca.addLibroEnProgreso(libro);
+                        libro.setEstadoLibro("En progreso");
+                    }
+                    biblioteca.abrirLibro(libro);
+                    irABiblioteca();
+                    break;
+                case 2:
+                    while(true){
+                        int pagina=vistaTienda.pedirPagina();
+                        if(pagina<0||pagina>libro.getNumPaginas()){
+                            vistaTienda.errorNumPaginas();
+                        }else{
+                            libro.setNumPaginasLeyendo(pagina);
+                            break;
+                        }
+                    }
+                    break;
+                case 3:
+                    biblioteca.addLibroLeido(libro);
+                    libro.setEstadoLibro("Leido");
+                    break;
+                case 4:
+                    irABiblioteca();
+                    break;
+            
+                default:
+                    break;
+            }
+        }else{
+            vistaTienda.noExisteLibro();
+            irABiblioteca();
+        }
+    }
+
 
     /**
      * Método para subir un libro a la biblioteca de libros de la tienda
      * Este metodo solo lo usan los administradores
      */
     public void subirLibro() {
-
+        String titulo=vistaTienda.pedirTituloLibro();
+        String autor=vistaTienda.pedirAutor();
+        String link=vistaTienda.pedirLinkLibro();
+        int numPaginas=vistaTienda.pedirNumPaginasLibro();
+        double precio=vistaTienda.pedirPrecioLibro();
+        String genero=vistaMenus.elegirGenero();
+        Libro libro=new Libro(titulo, autor, genero, link, numPaginas, precio, tienda.numLibros+1);
+        tienda.setNumLibros(tienda.getNumLibros()+1);
+        tienda.addLibro(libro);
+        vistaTienda.libroRegistrado();
+        inicio();
     }
 
     /**
@@ -200,6 +259,13 @@ public class TiendaUsuario {
 
         }
         inicio();
+    }
+
+    /**
+     * Método para salir del menú en que se encuentra el usuario
+     */
+    public void salir() {
+
     }
 
 }

@@ -30,4 +30,6 @@ public interface Genero {
      * @return Todos los libros del género
      */
     public String toString();
+
+    public void addLibro(Libro libro);
 }

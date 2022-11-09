@@ -110,6 +110,92 @@ public class VistaMenus {
                 System.out.println("No ha ingreado un número");
             }
         }
+    }
 
+
+    public void quererLeer() {
+        System.out.println("Bienvenid@ a tu biblioteca");
+        while (true) {
+            System.out.println("Elige una opción");
+            System.out.println("1) Leer un libro");
+            System.out.println("2) Salir");
+            int respuesta=0;
+            try {
+                respuesta = scanner2.nextInt();
+                if (respuesta > 0 && respuesta < 3) {
+                    tiendaUsuario.verBiblioteca(respuesta);
+                    break;
+                } else {
+                    System.out.println("No ingresaste una opción válida");
+                }
+            } catch (Exception e) {
+                System.out.println("No ingresaste un número");
+            }
+        } 
+    }
+
+    public void elegirLibro(){
+        while (true) {
+            System.out.println("Ingresa el id del libro que deseas leer");
+            int id=0;
+            try {
+                id = scanner2.nextInt();
+                
+            } catch (Exception e) {
+                System.out.println("No ingresaste un número");
+            }
+        }
+    }
+
+    public int opcionesLectura(){
+        int respuesta=0;
+        while (true) {
+            System.out.println("¿Qué deseas hacer con el libro?");
+            System.out.println("1) Leer");
+            System.out.println("2) Registrar progreso (página en la que te quedaste)");
+            System.out.println("3) Marcar como leído");
+            System.out.println("4) Salir");
+            
+            try {
+                respuesta = scanner2.nextInt();
+                if (respuesta > 0 && respuesta < 5) {
+                    return respuesta;
+                } else {
+                    System.out.println("No ingresaste una opción válida");
+                }
+            } catch (Exception e) {
+                System.out.println("No ingresaste un número");
+            }
+        }
+    }
+
+    public String elegirGenero(){
+        int respuesta=0;
+        while (true) {
+            System.out.println("Elige el género del libro");
+            System.out.println("1) Educativo");
+            System.out.println("2) Literario");
+            System.out.println("3) Non-fiction");
+            
+            try {
+                respuesta = scanner2.nextInt();
+                if (respuesta > 0 && respuesta < 4) {
+                    switch (respuesta) {
+                        case 1:
+                            return "educativo";
+                        case 2:
+                            return "literario";
+                        case 3:
+                            return "non-fiction";
+                        default:
+                            break;
+                    }
+                } else {
+                    System.out.println("No ingresaste una opción válida");
+                }
+            } catch (Exception e) {
+                System.out.println("No ingresaste un número");
+            }
+        }
     }
 }

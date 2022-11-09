@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Clase que contiene a los llibros de género NonFiction
  */
-public class NonFiction implements Genero {
+public class NonFiction implements Genero{
     private ArrayList<Libro> libros;
     private final String NOMBRE = "NonFiction";
 
@@ -17,7 +17,6 @@ public class NonFiction implements Genero {
 
     /**
      * Método para obtener la lista de libros del género NonFiction
-     * 
      * @return ArayList<Libro> La lista de libros de género NonFiction
      */
     public ArrayList<Libro> getLibros() {
@@ -26,7 +25,6 @@ public class NonFiction implements Genero {
 
     /**
      * Método para asignar los libros de género NonFiction
-     * 
      * @param libros El arraylist de los libros de género NonFiction
      */
     public void setLibros(ArrayList<Libro> libros) {
@@ -35,16 +33,15 @@ public class NonFiction implements Genero {
 
     /**
      * Método para agregar un libro a la lista de libros de género NonFiction
-     * 
      * @param libro El libro a agregar a la lista de libros de género NonFiction
      */
+    @Override
     public void addLibro(Libro libro) {
         libros.add(libro);
     }
 
     /**
      * Método para eliminar un libro de la lista de libros de género NonFiction
-     * 
      * @param aEliminar El libro a eliminar de la lista del género NonFiction
      */
     public void eliminarLibro(Libro aEliminar) {
@@ -57,7 +54,6 @@ public class NonFiction implements Genero {
 
     /**
      * Método para obtener el nombre del género
-     * 
      * @return String El nombre del género
      */
     @Override
@@ -67,7 +63,6 @@ public class NonFiction implements Genero {
 
     /**
      * Método para obtener un iterador del género
-     * 
      * @return Iterator el iterador del género
      */
     @Override
