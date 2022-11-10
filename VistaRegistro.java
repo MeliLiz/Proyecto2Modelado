@@ -35,10 +35,12 @@ public class VistaRegistro {
                     break;
                 }else{
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
                 
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
         registro.opcionesRegistro(respuesta);
@@ -84,6 +86,7 @@ public class VistaRegistro {
                 break;
             }catch(Exception e){
                 System.out.println("No ingresaste un numero");
+                scanner3.next();
             }
         }
         return cuenta; 
@@ -112,9 +115,11 @@ public class VistaRegistro {
                     break;
                 }else{
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
         return respuesta;  
@@ -145,5 +150,12 @@ public class VistaRegistro {
     public void despedida(){
         System.out.println("Gracias por visitar InkSpace");
         System.out.println("Saliendo...");
+    }
+
+    /**
+     * Método para notificar que se ha registrado un usuario
+     */
+    public void registroExitoso() {
+        System.out.println("Se ha registrado correctamente. Por favor inicie sesión");
     }
 }

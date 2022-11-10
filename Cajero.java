@@ -19,6 +19,7 @@ public class Cajero implements ServicioBanco {
      * @return La nueva cuenta creada
      */
     public CuentaBancaria crearCuenta(String beneficiario, String tipoCuenta) {
+        
         return banco.crearCuenta(beneficiario, tipoCuenta);
     }
 

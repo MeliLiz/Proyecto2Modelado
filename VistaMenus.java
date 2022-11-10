@@ -37,9 +37,11 @@ public class VistaMenus {
                     break;
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
 
@@ -63,9 +65,11 @@ public class VistaMenus {
                     break;
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
 
         }
@@ -88,9 +92,11 @@ public class VistaMenus {
                     break;
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
     }
@@ -110,6 +116,7 @@ public class VistaMenus {
                 break;
             } catch (Exception e) {
                 System.out.println("No has ingresado un número");
+                scanner2.next();
             }
         }
         return respuesta;
@@ -130,9 +137,11 @@ public class VistaMenus {
                     tiendaUsuario.iniciarPagoMenu(respuesta);
                 } else {
                     System.out.println("No ha ingresado una opcion valida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ha ingreado un número");
+                scanner2.next();
             }
         }
     }
@@ -154,9 +163,11 @@ public class VistaMenus {
                     break;
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         } 
     }
@@ -173,6 +184,7 @@ public class VistaMenus {
                 tiendaUsuario.getLibro(id);
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
     }
@@ -197,9 +209,11 @@ public class VistaMenus {
                     return respuesta;
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
     }
@@ -231,9 +245,11 @@ public class VistaMenus {
                     }
                 } else {
                     System.out.println("No ingresaste una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
+                scanner2.next();
             }
         }
     }

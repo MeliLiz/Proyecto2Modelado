@@ -29,9 +29,13 @@ public class Banco implements ServicioBanco {
         while (existeCuenta(numCuenta)) {
             numCuenta = random.nextLong();
         }
+        if(numCuenta<0){
+            numCuenta=numCuenta*-1;
+        }
         int cvv = random.nextInt(899) + 100;
         CuentaBancaria cuenta=null;
         cuenta=fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
+        cuentas.put(numCuenta, cuenta);
         return cuenta;
     }
 
@@ -116,8 +120,9 @@ public class Banco implements ServicioBanco {
     public boolean existeCuenta(Long cuenta) {
         Set<Long> llaves = cuentas.keySet();
         for (Long llave : llaves) {
-            if (llave == cuenta)
+            if (llave.equals(cuenta)){
                 return true;
+            }
         }
         return false;
     }
