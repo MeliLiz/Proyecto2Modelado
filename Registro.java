@@ -68,6 +68,7 @@ public class Registro {
         //Se registra el usuario
         Usuario usuario=new Usuario(nombreUsuario, contrasena, numCuenta);
         tienda.registrar(usuario);
+        vista.registroExitoso();
         menuOpciones();
     }
 
