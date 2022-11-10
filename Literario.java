@@ -86,6 +86,10 @@ public class Literario implements Genero {
         return libros.size();
     }
 
+    /**
+     * Método para poder visualizar los libros registrados del género literario
+     * @return String La representación en cadena de los libros del género literario
+     */
     @Override
     public String toString() {
         String libros = "";

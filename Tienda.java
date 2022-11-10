@@ -103,6 +103,7 @@ public class Tienda implements SujetoObservable {
 
     /**
      * Método para registrar a un cliente
+     * @param El usuario a registrar
      */
     @Override
     public void registrar(Usuario usuario) {
@@ -113,6 +114,7 @@ public class Tienda implements SujetoObservable {
 
     /**
      * Método para remover a un cliente
+     * @param usuario El usuario a quitar del registro
      */
     @Override
     public void remover(Usuario usuario) {
@@ -131,10 +133,19 @@ public class Tienda implements SujetoObservable {
 
     }
 
+    /**
+     * Método para registrar a un nuevo administrador de la tienda
+     * @param nuevoAdmin El nuevo administrador de la tienda
+     */
     public void registrarAdmin(Admin nuevoAdmin) {
         admin.put(nuevoAdmin.getNombre(), nuevoAdmin);
     }
 
+    /**
+     * Método para obtener a un usuario registrado
+     * @param nombreUsuario El nombre del usuario
+     * @return El usuario registrado, null si el usuario no está registrado
+     */
     public Usuario getUsuario(String nombreUsuario) {
         Set<String> llaves = usuarios.keySet();
         for (String llave : llaves) {
@@ -145,23 +156,49 @@ public class Tienda implements SujetoObservable {
         return null;
     }
 
+    /**
+     * Método para mostrar la colección de libros disponibles
+     * @return String Los datos de los libros en la colección
+     */
     public String mostrarCatalogo() {
         return coleccion.toString();
     }
 
+    /**
+     * Método para obtener un libro de la coleccion
+     * @param id El número de identificador del libro
+     * @return El libro buscado, null si el id no corresponde a algún libro
+     */
     public Libro getLibro(int id) {
         return coleccion.getLibro(id);
     }
 
+    /**
+     * Método para obtener el número de libros que tiene la tienda
+     * @return
+     */
     public int getNumLibros() {
         return this.numLibros;
     }
 
+    /**
+     * Método para asignar el número de libros que tiene la tienda
+     * @param numLibros El número de libros en la colección de libros de la tienda
+     */
     public void setNumLibros(int numLibros) {
         this.numLibros = numLibros;
     }
 
+    /**
+     * Método para agregar un libro a la colección de libros
+     * @param libro El libro a agregar a la colección
+     */
     public void addLibro(Libro libro){
         coleccion.addLibro(libro);
+        numLibros+=1;
+        //Si el libro registrado es gratis, notificamos a los usuarios que hay un libro nuevo gratis
+        if(libro.getPrecio()==0){
+            notificar();
+        }
     }
 }

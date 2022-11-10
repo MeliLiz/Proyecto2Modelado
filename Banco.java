@@ -9,6 +9,9 @@ public class Banco implements ServicioBanco {
     private Hashtable<Long, CuentaBancaria> cuentas;
     private FabricaCuentas fabricaCuentas;
 
+    /**
+     * Constructor del banco
+     */
     public Banco() {
         cuentas = new Hashtable<Long, CuentaBancaria>();
         fabricaCuentas=new FabricaCuentas();
@@ -52,6 +55,9 @@ public class Banco implements ServicioBanco {
     /**
      * Método para depositar dinero en una cuenta bancaria
      * boolean true si el depósito fue exitoso, false en otro caso
+     * @param numCuenta El número de cuenta a la que se depositará
+     * @param deposito La cantidad a depositar
+     * @return boolean True si el depósito fue exitoso, false en otro caso
      */
     @Override
     public boolean depositar(Long numCuenta, double deposito) {
@@ -68,6 +74,10 @@ public class Banco implements ServicioBanco {
     /**
      * Método para retirar dinero de una cuenta bancaria
      * boolean true si el retiro fue exitoso, false en otro caso
+     * @param numCuenta El número de cuenta a la que se retirará
+     * @param cvv El cvv de la cuenta a la que se retirará dinero
+     * @param retiro La cantidad a retirar
+     * @return boolean True si el retiro fue exitoso, false en otro caso
      */
     @Override
     public boolean retirar(Long numCuenta, int cvv, double retiro) {
@@ -132,13 +142,6 @@ public class Banco implements ServicioBanco {
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        Random random = new Random();
-        int r = random.nextInt(899) + 100;
-
-        System.out.println(r);
     }
 
 }

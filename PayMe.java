@@ -5,6 +5,10 @@
 public class PayMe {
     private Banco banco;
 
+    /**
+     * El constructor del sistema payme
+     * @param banco El banco asociado al sistema payme
+     */
     public PayMe(Banco banco) {
         this.banco = banco;
     }

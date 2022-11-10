@@ -1,17 +1,28 @@
 import java.util.Scanner;
 
+/**
+ * Clase de la parte de la vista de los menús de la tiendaUsuario
+ */
 public class VistaMenus {
-    private TiendaUsuario tiendaUsuario;
+    private TiendaUsuario tiendaUsuario;//La tiendaUsuario asociada
     private Scanner scanner1 = new Scanner(System.in);// Scanner para líneas
     private Scanner scanner2 = new Scanner(System.in);// Scanner para números
-    private Scanner scanner3 = new Scanner(System.in);// Scanner para long
+    private Scanner scanner3 = new Scanner(System.in);// Scanner para double
 
+    /**
+     * Constructor
+     * @param tienda la tiendaUsuario asociada
+     */
     public VistaMenus(TiendaUsuario tienda) {
         tiendaUsuario = tienda;
     }
 
+    /**
+     * Método para mostrar las opciones de la tienda al usuario:
+     * Ver los libros disponibles en la tienda, comprar libros, ir a la biblioteca del usuario o salir
+     */
     public void bienvenida() {
-        System.out.println("Bienvenid@ a InkSpace");
+        
         int respuesta;
         while (true) {
             System.out.println("Selecciona una opcion");
@@ -34,6 +45,10 @@ public class VistaMenus {
 
     }
 
+    /**
+     * Método para dar las opciones de acciones a un administrador:
+     * Registrar un nuevo libro en la tienda o salir
+     */
     public void bienvenidaAdmin() {
         System.out.println("**Estas ingresando como Administrador**");
         int respuesta;
@@ -56,6 +71,9 @@ public class VistaMenus {
         }
     }
 
+    /**
+     * Método para mostrar el menú de opciones para comenzar a agregar al carrito o salir
+     */
     public void imprimirMenuCompra() {
         int respuesta;
         System.out.println("Bienvenido al menu de compras");
@@ -77,12 +95,16 @@ public class VistaMenus {
         }
     }
 
+    /**
+     * Método para pedir el id de un libro para agregar al carrito
+     * @return int el id del libro ingresado por el usuario
+     */
     public int ingresarCodigoLibro() {
         int respuesta = 0;
 
         while (true) {
+            System.out.print("Por favor ingrese el id del libro");
             System.out.println("Si ya ha terminado de agregar libros al carrito, ingrese -1");
-            System.out.print("Por favor, ingrese el id del libro");
             try {
                 respuesta = scanner2.nextInt();
                 break;
@@ -93,6 +115,9 @@ public class VistaMenus {
         return respuesta;
     }
 
+    /**
+     * Método para mostrar el menú para pagar los libros en el carrito o salir
+     */
     public void pagar() {
         int respuesta = 0;
         System.out.println("**Menu de Pago**");
@@ -112,7 +137,9 @@ public class VistaMenus {
         }
     }
 
-
+    /**
+     * Método para preguntar al usuario si quiere leer un libro o salir
+     */
     public void quererLeer() {
         System.out.println("Bienvenid@ a tu biblioteca");
         while (true) {
@@ -134,19 +161,27 @@ public class VistaMenus {
         } 
     }
 
+    /**
+     * Método para pedir al usuario el id del libro que quiere leer
+     */
     public void elegirLibro(){
         while (true) {
             System.out.println("Ingresa el id del libro que deseas leer");
             int id=0;
             try {
                 id = scanner2.nextInt();
-                
+                tiendaUsuario.getLibro(id);
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
             }
         }
     }
 
+    /**
+     * Método para mostrar el menú de acciones a hacer con un libro:
+     * Leer, registrar progreso, marcar como leido o salir
+     * @return int La respuesta del usuario: 1 para leer, 2 para registrar progreso, 3 para marcar como leido, 4 para salir
+     */
     public int opcionesLectura(){
         int respuesta=0;
         while (true) {
@@ -169,6 +204,10 @@ public class VistaMenus {
         }
     }
 
+    /**
+     * Método para mostrar el menú de los géneros disponibles en la tienda para poder subir un libro
+     * @return String El género elegido: "ducativo", "literario", "non-fiction"
+     */
     public String elegirGenero(){
         int respuesta=0;
         while (true) {

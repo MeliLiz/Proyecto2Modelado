@@ -86,16 +86,28 @@ public class Coleccion implements Genero {
         return numLibros;
     }
 
+    /**
+     * Método para obtener un iterador de la colección de libros
+     * @return Iterator El iterador de la colección
+     */
     @Override
     public Iterator crearIterador() {
         return listaGeneros.iterator();
     }
 
+    /**
+     * Método para obtener el nombre de la colección
+     * @retur String El nombre de la colección
+     */
     @Override
     public String getNombre() {
         return "Libros InksSpace";
     }
 
+    /**
+     * Método para obtener el número de libros que hay en la colección
+     * @return int El número de libros de la colección
+     */
     @Override
     public int getNumeroDeLibros() {
         int numLibros = 0;
@@ -105,6 +117,10 @@ public class Coleccion implements Genero {
         return numLibros;
     }
 
+    /**
+     * Método para poder visualizar los libros de la colección con el nombre de cada género
+     * @return String La representación en cadena de los libros y el nombre de sus géneros correspondientes
+     */
     @Override
     public String toString() {
         String toString = getNombre();
@@ -116,6 +132,10 @@ public class Coleccion implements Genero {
         return toString;
     }
 
+    /**
+     * Método para agregar un libro a la colección
+     * @param libro El libro a agregar en la colección
+     */
     @Override
     public void addLibro(Libro libro){
         if(libro!=null){

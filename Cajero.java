@@ -1,7 +1,12 @@
 public class Cajero implements ServicioBanco {
-    private Banco banco;
-    private VistaBanco vistaBanco;
 
+    private Banco banco;//El banco asociado al cajero
+    private VistaBanco vistaBanco;//La vista del banco
+
+    /**
+     * Constructor
+     * @param banco El banco asociado al cajero
+     */
     public Cajero(Banco banco) {
         this.banco = banco;
         this.vistaBanco = new VistaBanco(this);

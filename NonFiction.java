@@ -70,11 +70,20 @@ public class NonFiction implements Genero{
         return libros.iterator();
     }
 
+    /**
+     * Método para obtener el número de libros del género
+     * 
+     * @return int El número de libros del género
+     */
     @Override
     public int getNumeroDeLibros() {
         return libros.size();
     }
 
+    /**
+     * Método para poder visualizar los libros registrados del género educativo
+     * @return String La representación en cadena de los libros del género educativo
+     */
     @Override
     public String toString() {
         String libros = "";

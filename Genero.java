@@ -31,5 +31,9 @@ public interface Genero {
      */
     public String toString();
 
+    /**
+     * Método para agregar un libro al género
+     * @param libro El nuevo libro a agregar
+     */
     public void addLibro(Libro libro);
 }
