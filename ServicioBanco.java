@@ -24,12 +24,12 @@ public interface ServicioBanco {
      * 
      * @return
      */
-    public boolean depositar(Long numCuenta, double deposito);
+    public boolean depositar(long numCuenta, double deposito);
 
     /**
      * Método para retirar dinero de una cuenta de banco
      * 
      * @return
      */
-    public boolean retirar(Long numCuenta, int cvv, double retiro);
+    public boolean retirar(long numCuenta, int cvv, double retiro);
 }
