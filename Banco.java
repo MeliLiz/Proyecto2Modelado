@@ -14,7 +14,7 @@ public class Banco implements ServicioBanco {
      */
     public Banco() {
         cuentas = new Hashtable<Long, CuentaBancaria>();
-        fabricaCuentas=new FabricaCuentas();
+        fabricaCuentas = new FabricaCuentas();
     }
 
     /**
@@ -29,12 +29,12 @@ public class Banco implements ServicioBanco {
         while (existeCuenta(numCuenta)) {
             numCuenta = random.nextLong();
         }
-        if(numCuenta<0){
-            numCuenta=numCuenta*-1;
+        if (numCuenta < 0) {
+            numCuenta = numCuenta * -1;
         }
         int cvv = random.nextInt(899) + 100;
-        CuentaBancaria cuenta=null;
-        cuenta=fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
+        CuentaBancaria cuenta = null;
+        cuenta = fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
         cuentas.put(numCuenta, cuenta);
         return cuenta;
     }
@@ -49,7 +49,7 @@ public class Banco implements ServicioBanco {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
-            if (llave == numCuenta) {
+            if (llave.equals(numCuenta)) {
                 return cuentas.get(llave).getSaldo();
             }
         }
@@ -59,16 +59,17 @@ public class Banco implements ServicioBanco {
     /**
      * Método para depositar dinero en una cuenta bancaria
      * boolean true si el depósito fue exitoso, false en otro caso
+     * 
      * @param numCuenta El número de cuenta a la que se depositará
-     * @param deposito La cantidad a depositar
+     * @param deposito  La cantidad a depositar
      * @return boolean True si el depósito fue exitoso, false en otro caso
      */
     @Override
-    public boolean depositar(Long numCuenta, double deposito) {
+    public boolean depositar(long numCuenta, double deposito) {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
-            if (llave == numCuenta) {
+            if (llave.equals(numCuenta)) {
                 return cuentas.get(llave).depositar(deposito);
             }
         }
@@ -78,13 +79,14 @@ public class Banco implements ServicioBanco {
     /**
      * Método para retirar dinero de una cuenta bancaria
      * boolean true si el retiro fue exitoso, false en otro caso
+     * 
      * @param numCuenta El número de cuenta a la que se retirará
-     * @param cvv El cvv de la cuenta a la que se retirará dinero
-     * @param retiro La cantidad a retirar
+     * @param cvv       El cvv de la cuenta a la que se retirará dinero
+     * @param retiro    La cantidad a retirar
      * @return boolean True si el retiro fue exitoso, false en otro caso
      */
     @Override
-    public boolean retirar(Long numCuenta, int cvv, double retiro) {
+    public boolean retirar(long numCuenta, int cvv, double retiro) {
         if (verificarNumCuentaBancaria(numCuenta, cvv)) {
 
             return cuentas.get(numCuenta).retirar(retiro);
@@ -102,7 +104,7 @@ public class Banco implements ServicioBanco {
      * @param numCuentaDestino El numero de cuenta que recibirá el dinero
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
-    public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
+    public boolean transferir(long numCuentaOrigen, int cvvOrigen, long numCuentaDestino, double cantidad) {
         if (verificarNumCuentaBancaria(numCuentaOrigen, cvvOrigen) && existeCuenta(numCuentaDestino)) {
             if (retirar(numCuentaOrigen, cvvOrigen, cantidad)) {
                 return cuentas.get(numCuentaDestino).depositar(cantidad);
@@ -117,10 +119,10 @@ public class Banco implements ServicioBanco {
      * @param cuenta El numero de cuenta a comprobar
      * @return boolean true si la cuenta existe, false en otro caso
      */
-    public boolean existeCuenta(Long cuenta) {
+    public boolean existeCuenta(long cuenta) {
         Set<Long> llaves = cuentas.keySet();
         for (Long llave : llaves) {
-            if (llave.equals(cuenta)){
+            if (llave.equals(cuenta)) {
                 return true;
             }
         }
@@ -135,11 +137,11 @@ public class Banco implements ServicioBanco {
      * @return boolean true si corresponde el numero de cuenta con el cvv, false en
      *         otro caso
      */
-    private boolean verificarNumCuentaBancaria(Long numCuenta, int cvv) {
+    private boolean verificarNumCuentaBancaria(long numCuenta, int cvv) {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
-            if (llave == numCuenta) {
+            if (llave.equals(numCuenta)) {
                 if (cuentas.get(llave).getCvv() != cvv) {
                     return false;
                 }
@@ -147,6 +149,19 @@ public class Banco implements ServicioBanco {
             }
         }
         return false;
+    }
+
+    /**
+     * Método para obtener una cuenta dado su número de cuenta
+     * 
+     * @param numCuenta El número de cuenta que queremos obtener
+     * @return La cuenta que queríamos obtener
+     */
+    public CuentaBancaria obtenerUnaCuenta(long numCuenta) {
+        if (existeCuenta(numCuenta)) {
+            return cuentas.get(numCuenta);
+        }
+        return null;
     }
 
 }
