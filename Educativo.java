@@ -13,7 +13,11 @@ public class Educativo implements Genero {
      */
     public Educativo() {
         libros = new ArrayList<Libro>();
-    }
+        libros.add(new Libro("A short story of nearly everything", "Bill Bryson", "educativo", "https://drive.google.com/file/d/1HqoTNNVMe9n4d4zXVakVUEWUEGjYffr6/view?usp=sharing", 489, 40, 1));
+        libros.add(new Libro("Artificial intelligence for dummies", "John Paul Mueller, Luca Massaron", "educativo", "https://drive.google.com/file/d/1DJKLEVQ4Lz3A9-z2pTAnzarAkru6_o7n/view?usp=sharing", 339, 50, 2));
+        libros.add(new Libro("Neuroscience for dummies", "Frank Amthor", "educativo", "https://drive.google.com/file/d/1JOWKYHI_AvEtBm3zHsNoWInelNS1QZN7/view?usp=share_link", 387, 45, 3));
+
+    } 
 
     /**
      * Método para obtener la lista de libros del género Educativo

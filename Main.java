@@ -7,6 +7,8 @@ public class Main {
         System.out.println(cuenta.getNumCuenta());
         PayMe payme=new PayMe(banco);
         Tienda tienda=new Tienda(payme);
+        Admin admin=new Admin(tienda, "Roni", "roni");
+        tienda.registrarAdmin(admin);
         Registro registro=new Registro(tienda);
         registro.menuOpciones();
     }

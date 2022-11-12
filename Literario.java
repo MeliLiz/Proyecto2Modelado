@@ -13,6 +13,9 @@ public class Literario implements Genero {
      */
     public Literario() {
         libros = new ArrayList<Libro>();
+        libros.add(new Libro("Kafka on the shore", "Haruki Murakami", "literarion", "https://drive.google.com/file/d/1suMxEQ8iLd-YsZgjlQregmTkEMwWeh1c/view?usp=share_link", 442, 40, 4));
+        libros.add(new Libro("Klara and the sun", "Kazuo Ishiguro", "literarion", "https://drive.google.com/file/d/1KZy7H20FiLwVzt-hv_L1ETGJDD-2GhIL/view?usp=share_link", 254, 30, 5));
+        libros.add(new Libro("Verity", "Colleen Hoover", "literarion", "https://drive.google.com/file/d/1KeYBMVFdNRKIq9ts1Uevr34H5smITsNk/view?usp=share_link", 242, 55, 6));
     }
 
     /**
