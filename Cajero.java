@@ -55,65 +55,106 @@ public class Cajero implements ServicioBanco {
     }
 
     /**
+     * Método para comenzar con las funciones del banco con el usuario
+     */
+    public void mostrarMenu(){
+        vistaBanco.menuPreguntasUsuario();
+    }
+
+    /**
      * Método para el recibir la respuesta del usuario en el menú principal
      * 
      * @param respuesta La respuesta del usuario
      */
     public void menuPreguntasUsuario(int respuesta) {
         switch (respuesta) {
-            case 1:
-                String[] respuestas = vistaBanco.registrarse();
-                CuentaBancaria nuevaCuenta = banco.crearCuenta(respuestas[0], respuestas[1]);
-                vistaBanco.registroExitoso(nuevaCuenta);
-
+            case 1://registrarse
+                registrarse();
                 break;
-            case 2:
-                long numCuenta = vistaBanco.consultarSaldo();
-
-                if (banco.existeCuenta(numCuenta)) {
-                    vistaBanco.mostrarSaldo(banco.consultarSaldo(numCuenta), banco.existeCuenta(numCuenta));
-
-                }
-
+            case 2://consultar saldo
+                consultarSaldo();
                 break;
-            case 3:
-                double transferencia = vistaBanco.pedirDineroOperacion(true);
-                long numCuentaOrigen = vistaBanco.pedirNumCuenta(true);
-                long numCuentaDestino = vistaBanco.pedirNumCuenta(false);
-                int cvvOrigen = vistaBanco.pedirCVV();
-                vistaBanco.transferenciaExitosa(
-                        banco.transferir(numCuentaOrigen, cvvOrigen, numCuentaDestino, transferencia));
+            case 3: //transferir dinero
+                transferir();
                 break;
-            case 4:
-                long numCuentaUsuario = vistaBanco.pedirNumCuenta(true);
-
-                if (banco.existeCuenta(numCuentaUsuario)) {
-                    double deposito = vistaBanco.pedirDineroOperacion(false);
-                    boolean depositoExitoso = banco.depositar(numCuentaUsuario, deposito);
-                    vistaBanco.depositoExitoso(numCuentaUsuario, depositoExitoso);
-
-                } else {
-                    vistaBanco.mostrarErrorNumCuenta();
-                }
+            case 4://Depositar
+               depositar();
                 break;
-            case 5:
-                long numCuentaRetiro = vistaBanco.pedirNumCuenta(true);
-                if (banco.existeCuenta(numCuentaRetiro)) {
-                    double retiro = vistaBanco.retiro();
-                    int cvv = vistaBanco.pedirCVV();
-                    boolean retiroExitoso = banco.retirar(numCuentaRetiro, cvv, retiro);
-                    vistaBanco.retiroExitoso(retiro, retiroExitoso);
-
-                } else {
-                    vistaBanco.mostrarErrorNumCuenta();
-                }
-
+            case 5://retirar
+                retirar();
                 break;
-            case 0:
-                vistaBanco.salirAlMenuPrincipal();
-                break;
-            default:
+            default://salir
                 break;
         }
+        vistaBanco.salirAlMenuPrincipal();
+    }
+
+    /**
+     * Método para registrar a un nuevo usuario en el banco
+     */
+    private void registrarse(){
+        String[] respuestas = vistaBanco.registrarse();//Obtenemos el arreglo. En [0] está el nombre de usuario, en [1] el tipo de cuenta
+        //Se crea la cuenta
+        CuentaBancaria nuevaCuenta = banco.crearCuenta(respuestas[0], respuestas[1]);
+        //Se dan los datos de la nueva cuenta bancaria
+        vistaBanco.registroExitoso(nuevaCuenta);
+    }
+
+    /**
+     * Método para consultar el saldo de una cuenta
+     */
+    private void consultarSaldo(){
+        //Pedimos el numero de cuenta bancaria al usuario
+        long numCuenta = vistaBanco.consultarSaldo();
+        //Si la cuenta está registrada, se muestra el saldo disponible
+        double saldoDisponible=banco.consultarSaldo(numCuenta);
+        if (saldoDisponible!=-1) {
+            vistaBanco.mostrarSaldo(saldoDisponible);
+        }else{
+            vistaBanco.mostrarErrorNumCuenta();
+        }
+    }
+
+    /**
+     * Método para transferir dinero de una cuenta a otra
+     */
+    private void transferir(){
+        //Obtenemos los numeros de cuenta de donde se retirará dinero
+        long numCuentaOrigen = vistaBanco.pedirNumCuenta(true);
+        //Pedimos el cvv de la cuenta a la que se retirará dinero
+        int cvvOrigen = vistaBanco.pedirCVV();
+        //Pedimos el número de cuenta a la que depositará
+        long numCuentaDestino = vistaBanco.pedirNumCuenta(false);
+        //Obtenemos la cantidad a depositar del usuario
+        double transferencia = vistaBanco.pedirDineroOperacion(true);
+        
+        vistaBanco.transferenciaExitosa(banco.transferir(numCuentaOrigen, cvvOrigen, numCuentaDestino, transferencia));
+    }
+
+    /**
+     * Método para depositar dinero en una cuenta bancaria
+     */
+    private void depositar(){
+        //Pedimos el numero de cuenta y cantidad de deposito al usuario
+        long numCuentaUsuario = vistaBanco.pedirNumCuenta(true);
+        double deposito = vistaBanco.pedirDineroOperacion(false);
+        //Intentamos hacer el deposito
+        boolean depositoExitoso = banco.depositar(numCuentaUsuario, deposito);
+        vistaBanco.depositoExitoso(numCuentaUsuario, depositoExitoso);
+    }
+
+    /**
+     * Método para retirar dinero de una cuenta bancaria
+     */
+    private void retirar(){
+        //Pedimos los datos de la cuenta al usuario
+        long numCuentaRetiro = vistaBanco.pedirNumCuenta(true);
+        int cvv = vistaBanco.pedirCVV();
+        double retiro = vistaBanco.retiro();
+        //tratamos de hacer el retiro
+        boolean retiroExitoso = banco.retirar(numCuentaRetiro, cvv, retiro);
+        //Mostrams si el retiro fue o no exitoso
+        vistaBanco.retiroExitoso(retiro, retiroExitoso);
+       
     }
 }

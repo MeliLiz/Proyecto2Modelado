@@ -26,16 +26,21 @@ public class Banco implements ServicioBanco {
     public CuentaBancaria crearCuenta(String beneficiario, String tipoCuenta) {
         Random random = new Random();
         Long numCuenta = random.nextLong();
-        while (existeCuenta(numCuenta)) {
-            numCuenta = random.nextLong();
-        }
         if (numCuenta < 0) {
             numCuenta = numCuenta * -1;
         }
+        //verificamos que no exista el numero de cuenta
+        while (existeCuenta(numCuenta)) {
+            numCuenta = random.nextLong();
+            if (numCuenta < 0) {
+                numCuenta = numCuenta * -1;
+            }
+        }
+        //Obtenemos un cvv
         int cvv = random.nextInt(899) + 100;
-        CuentaBancaria cuenta = null;
-        cuenta = fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
-        cuentas.put(numCuenta, cuenta);
+        //Creamos la cuenta bancaria
+        CuentaBancaria cuenta = fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
+        cuentas.put(numCuenta, cuenta);//se registra la cuenta en el banco
         return cuenta;
     }
 
@@ -105,7 +110,9 @@ public class Banco implements ServicioBanco {
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
     public boolean transferir(long numCuentaOrigen, int cvvOrigen, long numCuentaDestino, double cantidad) {
+        //Verificamos que el número de cuenta origen coincida con su cvv y verificamos que la cuenta destino exista
         if (verificarNumCuentaBancaria(numCuentaOrigen, cvvOrigen) && existeCuenta(numCuentaDestino)) {
+            //Verificamos que se pueda retirar la cantidad deseada de la cuenta origen
             if (retirar(numCuentaOrigen, cvvOrigen, cantidad)) {
                 return cuentas.get(numCuentaDestino).depositar(cantidad);
             }

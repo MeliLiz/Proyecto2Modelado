@@ -41,9 +41,11 @@ public class VistaBanco {
                     break;
                 } else {
                     System.out.println("No ingreso una opción válida");
+                    scanner2.next();
                 }
             } catch (Exception e) {
                 System.out.println("No ingresó un número, vuelva a intentarlo");
+                scanner2.next();
             }
         }
 
@@ -88,7 +90,29 @@ public class VistaBanco {
      * @return Un scanner pidiendole al usuario su tipo de cuenta
      */
     public String pedirTipoCuenta() {
-        System.out.println("¿Qué tipo de cuenta desea?");
+        int respuesta=0;
+        while(true){
+            System.out.println("¿Qué tipo de cuenta desea?");
+            System.out.println("1) Basica: Límite de retiro y limite de deposito sin interés. $0" );
+            System.out.println("2) Premium: Sin límites. $500");
+            try {
+                respuesta = scanner2.nextInt();
+                if (respuesta >= 0 && respuesta < 3) {
+                    if(respuesta==1){
+                        return "basica";
+                    }else if(respuesta==2){
+                        return "premium";
+                    }
+                    break;
+                } else {
+                    System.out.println("No ingreso una opción válida");
+                    scanner2.next();
+                }
+            } catch (Exception e) {
+                System.out.println("No ingresó un número, vuelva a intentarlo");
+                scanner2.next();
+            }
+        }
         return scanner1.nextLine();
     }
 
@@ -97,9 +121,8 @@ public class VistaBanco {
      */
     public void registroExitoso(CuentaBancaria nuevaCuenta) {
         System.out.println("Se ha registrado su cuenta existosamente");
+        System.out.println("Es importante que guarde sus datos");
         System.out.println("Los datos de cuenta:\n" + nuevaCuenta);
-        salirAlMenuPrincipal();
-
     }
 
     /**
@@ -113,10 +136,10 @@ public class VistaBanco {
      */
     public long pedirNumCuenta(boolean tipoDeOperacion) {
         long cuenta = 0;
-        while (true) {
+        while (true) {//depositar
             if (tipoDeOperacion == true) {
                 System.out.print("Por favor ingresa tu cuenta bancaria: ");
-            } else {
+            } else {//retirar
                 System.out.println("Por favor ingrese el número de cuenta a la que se quiere transferir: ");
             }
 
@@ -146,16 +169,9 @@ public class VistaBanco {
      * Método para mostrar el saldo de una cuenta
      * 
      * @param saldo            El número de cuenta
-     * @param operacionExitosa Si la operacion que se realizo fue exitosa
      */
-    public void mostrarSaldo(double saldo, boolean operacionExitosa) {
-        if (operacionExitosa == true) {
-            System.out.println("Su saldo es: $" + saldo);
-
-        } else {
-            mostrarError();
-        }
-        salirAlMenuPrincipal();
+    public void mostrarSaldo(double saldo) {
+        System.out.println("Su saldo es de: $" + saldo);
 
     }
 
@@ -163,7 +179,7 @@ public class VistaBanco {
      * Método para mostrar en pantalla que ha ocurrido un error
      */
     private void mostrarError() {
-        System.out.println("Lo sentimos, ha ocurrido, un error, vuelva a intentarlo");
+        System.out.println("Lo sentimos, no pudimos realizar la operación requerida con su cuenta, por favor revise el estado de su cuenta");
     }
 
     /**
@@ -171,7 +187,6 @@ public class VistaBanco {
      */
     public void mostrarErrorNumCuenta() {
         System.out.println("Lo sentimos, el número de cuenta que ha ingresado no existe, intente de nuevo");
-        salirAlMenuPrincipal();
     }
 
     /**
@@ -185,11 +200,11 @@ public class VistaBanco {
     public double pedirDineroOperacion(boolean operacion) {
         double dineroOperacion = 0;
         while (true) {
-            if (operacion == true) {
+            if (operacion) {//transferir
                 System.out.print("Por favor ingrese la cantidad que desea transferir: ");
 
-            } else {
-                System.out.print("Ingrese el dinero que sea depositar: ");
+            } else {//depositar
+                System.out.print("Ingrese el dinero que desea depositar: ");
             }
             try {
                 dineroOperacion = scanner2.nextDouble();
@@ -200,7 +215,6 @@ public class VistaBanco {
             }
         }
         return dineroOperacion;
-
     }
 
     /**
@@ -236,7 +250,6 @@ public class VistaBanco {
         } else {
             mostrarError();
         }
-        salirAlMenuPrincipal();
     }
 
     /**
@@ -249,11 +262,10 @@ public class VistaBanco {
     public void depositoExitoso(long numCuenta, boolean depositoExitoso) {
         if (depositoExitoso == true) {
             System.out.println("El depósito fue exitoso");
-            mostrarSaldo(numCuenta, depositoExitoso);
+            mostrarSaldo(numCuenta);
         } else {
-            System.out.println("Su depósito ha fallado, vuelva a intentarlo");
+            mostrarErrorNumCuenta();
         }
-        salirAlMenuPrincipal();
     }
 
     /**
@@ -286,7 +298,7 @@ public class VistaBanco {
     public void retiroExitoso(double cantidadRetirada, boolean retiroExitoso) {
         if (retiroExitoso == true) {
             System.out.println("Su retiro fue exitoso");
-            mostrarSaldo(cantidadRetirada, retiroExitoso);
+            System.out.println("Se han retirado $"+cantidadRetirada+" de su cuenta");
         } else {
             mostrarError();
         }
