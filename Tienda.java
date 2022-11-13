@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Set;
 
 /**
  * Clase que simula una tienda de libros
  */
-public class Tienda implements SujetoObservable {
+public class Tienda implements SujetoObservable, Serializable {
     private Hashtable<String, Usuario> usuarios;
     private Hashtable<String, Admin> admin;
     Coleccion coleccion;
@@ -16,13 +17,23 @@ public class Tienda implements SujetoObservable {
     /**
      * Constructor
      */
-    public Tienda(PayMe payme) {
+    public Tienda(PayMe payme, Long numCuenta) {
         usuarios = new Hashtable<>();
         admin = new Hashtable<>();
         coleccion = new Coleccion();
         payMe = payme;
-        cuentaBancaria = 0L;//////////////////////////////////////////////////// Registrar la cuenta
+        cuentaBancaria = numCuenta;
         numLibros = coleccion.getNumLibros();
+    }
+
+    public Admin getAdmin(){
+        Set<String> llaves = admin.keySet();
+        for (String llave : llaves) {
+            if (llave.equals("Ethan") && admin.get(llave).getContrasena().equals("x23_?Ae")) {
+                return admin.get(llave);
+            }
+        }
+        return null;
     }
 
     /**
@@ -200,5 +211,13 @@ public class Tienda implements SujetoObservable {
         if(libro.getPrecio()==0){
             notificar();
         }
+    }
+
+    /**
+     * Método para obtener el sistema PayMe de la tienda
+     * @return
+     */
+    public PayMe getPayMe(){
+        return payMe;
     }
 }

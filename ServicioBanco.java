@@ -17,19 +17,19 @@ public interface ServicioBanco {
      * @param numCuenta El número de cuenta del que se quiere consultar el saldo
      * @return El saldo de la cuenta solicitada, -1 si la cuenta no existe
      */
-    public double consultarSaldo(long numCuenta);
+    public double consultarSaldo(Long numCuenta);
 
     /**
      * Método para depositardinero en una cuenta de banco
      * 
      * @return
      */
-    public boolean depositar(long numCuenta, double deposito);
+    public boolean depositar(Long numCuenta, double deposito);
 
     /**
      * Método para retirar dinero de una cuenta de banco
      * 
      * @return
      */
-    public boolean retirar(long numCuenta, int cvv, double retiro);
+    public boolean retirar(Long numCuenta, int cvv, double retiro);
 }

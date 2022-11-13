@@ -5,7 +5,7 @@ public class VistaTienda {
     private TiendaUsuario tiendaUsuario;//La tiendaUsuario asociada
     private Scanner scanner1 = new Scanner(System.in);// Scanner para líneas
     private Scanner scanner2 = new Scanner(System.in);// Scanner para números
-    private Scanner scanner3 = new Scanner(System.in);// Scanner para long
+    private Scanner scanner3 = new Scanner(System.in);// Scanner para Long
 
     /**
      * Constructor
@@ -147,6 +147,13 @@ public class VistaTienda {
     }
 
     /**
+     * Método para notificar al usuario que el numero de paginas de progreso en el libro se ha acrtualizado
+     */
+    public void progresoRegistrado(){
+        System.out.println("Se ha registrado tu progreso exitosamente");
+    }
+
+    /**
      * Método para pedir el título de un libro a registrar
      * @return String El título del libro ingresado por el usuario
      */
@@ -160,7 +167,7 @@ public class VistaTienda {
      * @return String El autor del libro ingresado por el usuario
      */
     public String pedirAutor(){
-        System.out.println("Ingresa el título del libro");
+        System.out.println("Ingresa el autor del libro");
         return scanner1.nextLine();
     }
 
@@ -180,7 +187,7 @@ public class VistaTienda {
     public int pedirNumPaginasLibro(){
         Integer numPaginas=0;
         while(true){
-            System.out.println("Ingresa el numero de página");
+            System.out.println("Ingresa el numero de páginas");
             try {
                 numPaginas=scanner2.nextInt();
                 return numPaginas;
@@ -195,7 +202,6 @@ public class VistaTienda {
      * @return double El precio del libro ingresado por el usuario
      */
     public double pedirPrecioLibro(){
-        System.out.println("Ingresa el precio del libro");
         Double precio;
         while(true){
             System.out.println("Ingresa el precio del libro");
@@ -220,7 +226,7 @@ public class VistaTienda {
      * @param numLibrosGratis
      */
     public void mostrarNumLibrosGratis(int numLibrosGratis) {
-        System.out.println("Se han agregado "+ numLibrosGratis+" en la tienda desde tu última visita!. Échales un vistazo ");
+        System.out.println("Se ha(n) agregado "+ numLibrosGratis+" libro(s) gratis en la tienda desde tu última visita!. Écha un vistazo! ");
     }
 
 }

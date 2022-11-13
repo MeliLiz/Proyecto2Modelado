@@ -7,7 +7,7 @@ public class VistaRegistro {
     private Registro registro;//El registro asociaado
     private Scanner scanner1=new Scanner(System.in);//Scanner para líneas
     private Scanner scanner2=new Scanner(System.in);//Scanner para números
-    private Scanner scanner3=new Scanner(System.in);//Scanner para long
+    private Scanner scanner3=new Scanner(System.in);//Scanner para Long
 
     /**
      * Constructor
@@ -75,10 +75,10 @@ public class VistaRegistro {
 
     /**
      * Método para pedir el número de cuenta bancaria del usuario
-     * @return long El numero de cuenta bancaria ingresado
+     * @return Long El numero de cuenta bancaria ingresado
      */
-    public long pedirCuentaBancaria(){
-        long cuenta=0;
+    public Long pedirCuentaBancaria(){
+        Long cuenta=0L;
         while(true){
             System.out.println("Por favor ingresa tu cuenta bancaria");
             try{

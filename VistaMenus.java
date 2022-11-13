@@ -32,7 +32,7 @@ public class VistaMenus {
             System.out.println("4) Salir");
             try {
                 respuesta = scanner2.nextInt();
-                if (respuesta > 1 && respuesta < 5) {
+                if (respuesta > 0 && respuesta < 5) {
                     tiendaUsuario.menuOpciones(respuesta);
                     break;
                 } else {
@@ -81,15 +81,19 @@ public class VistaMenus {
     public void imprimirMenuCompra() {
         int respuesta;
         System.out.println("Bienvenido al menu de compras");
+        ciclo:
         while (true) {
             System.out.println("¿Qué quieres hacer?");
             System.out.println("1) Agregar al carrito");
             System.out.println("2) Salir");
             try {
                 respuesta = scanner2.nextInt();
-                if (respuesta > 0 && respuesta < 3) {
+                if (respuesta==1) {
                     tiendaUsuario.menuOpcionesCarrito(respuesta);
                     break;
+                }else if(respuesta==2){
+                    tiendaUsuario.inicio();
+                    break ciclo;
                 } else {
                     System.out.println("No ingresaste una opción válida");
                     scanner2.next();
@@ -110,7 +114,7 @@ public class VistaMenus {
 
         while (true) {
             System.out.print("Por favor ingrese el id del libro");
-            System.out.println("Si ya ha terminado de agregar libros al carrito, ingrese -1");
+            System.out.println("\nSi ya ha terminado de agregar libros al carrito, ingrese -1");
             try {
                 respuesta = scanner2.nextInt();
                 break;
@@ -128,13 +132,18 @@ public class VistaMenus {
     public void pagar() {
         int respuesta = 0;
         System.out.println("**Menu de Pago**");
+        ciclo:
         while (true) {
             System.out.println("1) Pagar libro(s) en carrito");
-            System.out.println("2) salir");
+            System.out.println("2) Salir");
             try {
                 respuesta = scanner2.nextInt();
-                if (respuesta > 0 && respuesta < 3) {
+                if (respuesta==1) {
                     tiendaUsuario.iniciarPagoMenu(respuesta);
+                    break;
+                }else if(respuesta==2){
+                    tiendaUsuario.inicio();
+                    break ciclo;
                 } else {
                     System.out.println("No ha ingresado una opcion valida");
                     scanner2.next();
@@ -151,6 +160,7 @@ public class VistaMenus {
      */
     public void quererLeer() {
         System.out.println("Bienvenid@ a tu biblioteca");
+        ciclo:
         while (true) {
             System.out.println("Elige una opción");
             System.out.println("1) Leer un libro");
@@ -158,10 +168,13 @@ public class VistaMenus {
             int respuesta=0;
             try {
                 respuesta = scanner2.nextInt();
-                if (respuesta > 0 && respuesta < 3) {
+                if (respuesta==1) {
                     tiendaUsuario.verBiblioteca(respuesta);
                     break;
-                } else {
+                } else if(respuesta==2){
+                    tiendaUsuario.inicio();
+                    break ciclo;
+                }else {
                     System.out.println("No ingresaste una opción válida");
                     scanner2.next();
                 }
@@ -182,6 +195,7 @@ public class VistaMenus {
             try {
                 id = scanner2.nextInt();
                 tiendaUsuario.getLibro(id);
+                break;
             } catch (Exception e) {
                 System.out.println("No ingresaste un número");
                 scanner2.next();
@@ -196,6 +210,7 @@ public class VistaMenus {
      */
     public int opcionesLectura(){
         int respuesta=0;
+        ciclo:
         while (true) {
             System.out.println("¿Qué deseas hacer con el libro?");
             System.out.println("1) Leer");
@@ -206,7 +221,7 @@ public class VistaMenus {
             try {
                 respuesta = scanner2.nextInt();
                 if (respuesta > 0 && respuesta < 5) {
-                    return respuesta;
+                    break ciclo;
                 } else {
                     System.out.println("No ingresaste una opción válida");
                     scanner2.next();
@@ -216,6 +231,7 @@ public class VistaMenus {
                 scanner2.next();
             }
         }
+        return respuesta;
     }
 
     /**

@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Clase para representar una cuenta bancaria
  */
-public abstract class CuentaBancaria {
+public abstract class CuentaBancaria implements Serializable {
     private String beneficiario;
     private Long numCuenta;
     private int cvv;

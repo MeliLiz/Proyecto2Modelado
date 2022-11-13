@@ -8,7 +8,7 @@ public class VistaBanco {
     private Scanner scanner1 = new Scanner(System.in);// Scanner para líneas
     private Scanner scanner2 = new Scanner(System.in);// Scanner para números
     private Scanner scanner4 = new Scanner(System.in);// Scanner para double
-    private Scanner scanner3 = new Scanner(System.in);// Scanner para long
+    private Scanner scanner3 = new Scanner(System.in);// Scanner para Long
 
     /**
      * Constructor
@@ -134,8 +134,8 @@ public class VistaBanco {
      *                        depositar dinero a tu cuenta, false cuando se quiere
      *                        transferir dinero a otra cuenta
      */
-    public long pedirNumCuenta(boolean tipoDeOperacion) {
-        long cuenta = 0;
+    public Long pedirNumCuenta(boolean tipoDeOperacion) {
+        Long cuenta = 0L;
         while (true) {//depositar
             if (tipoDeOperacion == true) {
                 System.out.print("Por favor ingresa tu cuenta bancaria: ");
@@ -159,7 +159,7 @@ public class VistaBanco {
      * 
      * @return El número de cuenta del usuario
      */
-    public long consultarSaldo() {
+    public Long consultarSaldo() {
         System.out.println("**Consulta de saldo**");
 
         return pedirNumCuenta(true);
@@ -259,10 +259,10 @@ public class VistaBanco {
      * @param depositoExitoso  boolean para el éxito del depósito: true si el
      *                         depósito fue exitoso, false en otro caso
      */
-    public void depositoExitoso(long numCuenta, boolean depositoExitoso) {
+    public void depositoExitoso(double saldo, boolean depositoExitoso) {
         if (depositoExitoso == true) {
             System.out.println("El depósito fue exitoso");
-            mostrarSaldo(numCuenta);
+            mostrarSaldo(saldo);
         } else {
             mostrarErrorNumCuenta();
         }

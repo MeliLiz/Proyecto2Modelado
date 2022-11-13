@@ -1,4 +1,6 @@
-public class Cajero implements ServicioBanco {
+import java.io.Serializable;
+
+public class Cajero implements ServicioBanco, Serializable{
 
     private Banco banco;// El banco asociado al cajero
     private VistaBanco vistaBanco;// La vista del banco
@@ -31,7 +33,7 @@ public class Cajero implements ServicioBanco {
      * @return El saldo de la cuenta solicitada, -1 si la cuenta no existe
      */
     @Override
-    public double consultarSaldo(long numCuenta) {
+    public double consultarSaldo(Long numCuenta) {
         return banco.consultarSaldo(numCuenta);
     }
 
@@ -41,7 +43,7 @@ public class Cajero implements ServicioBanco {
      * @return boolean true si el depósito fue exitoso, false en otro caso
      */
     @Override
-    public boolean depositar(long numCuenta, double deposito) {
+    public boolean depositar(Long numCuenta, double deposito) {
         return banco.depositar(numCuenta, deposito);
     }
 
@@ -50,7 +52,7 @@ public class Cajero implements ServicioBanco {
      * boolean true si el retiro fue exitoso, false en otro caso
      */
     @Override
-    public boolean retirar(long numCuenta, int cvv, double retiro) {
+    public boolean retirar(Long numCuenta, int cvv, double retiro) {
         return banco.retirar(numCuenta, cvv, retiro);
     }
 
@@ -70,23 +72,28 @@ public class Cajero implements ServicioBanco {
         switch (respuesta) {
             case 1://registrarse
                 registrarse();
+                vistaBanco.salirAlMenuPrincipal();
                 break;
             case 2://consultar saldo
                 consultarSaldo();
+                vistaBanco.salirAlMenuPrincipal();
                 break;
             case 3: //transferir dinero
                 transferir();
+                vistaBanco.salirAlMenuPrincipal();
                 break;
             case 4://Depositar
                depositar();
+               vistaBanco.salirAlMenuPrincipal();
                 break;
             case 5://retirar
                 retirar();
+                vistaBanco.salirAlMenuPrincipal();
                 break;
             default://salir
                 break;
         }
-        vistaBanco.salirAlMenuPrincipal();
+        
     }
 
     /**
@@ -105,7 +112,7 @@ public class Cajero implements ServicioBanco {
      */
     private void consultarSaldo(){
         //Pedimos el numero de cuenta bancaria al usuario
-        long numCuenta = vistaBanco.consultarSaldo();
+        Long numCuenta = vistaBanco.consultarSaldo();
         //Si la cuenta está registrada, se muestra el saldo disponible
         double saldoDisponible=banco.consultarSaldo(numCuenta);
         if (saldoDisponible!=-1) {
@@ -120,11 +127,11 @@ public class Cajero implements ServicioBanco {
      */
     private void transferir(){
         //Obtenemos los numeros de cuenta de donde se retirará dinero
-        long numCuentaOrigen = vistaBanco.pedirNumCuenta(true);
+        Long numCuentaOrigen = vistaBanco.pedirNumCuenta(true);
         //Pedimos el cvv de la cuenta a la que se retirará dinero
         int cvvOrigen = vistaBanco.pedirCVV();
         //Pedimos el número de cuenta a la que depositará
-        long numCuentaDestino = vistaBanco.pedirNumCuenta(false);
+        Long numCuentaDestino = vistaBanco.pedirNumCuenta(false);
         //Obtenemos la cantidad a depositar del usuario
         double transferencia = vistaBanco.pedirDineroOperacion(true);
         
@@ -136,11 +143,11 @@ public class Cajero implements ServicioBanco {
      */
     private void depositar(){
         //Pedimos el numero de cuenta y cantidad de deposito al usuario
-        long numCuentaUsuario = vistaBanco.pedirNumCuenta(true);
+        Long numCuentaUsuario = vistaBanco.pedirNumCuenta(true);
         double deposito = vistaBanco.pedirDineroOperacion(false);
         //Intentamos hacer el deposito
         boolean depositoExitoso = banco.depositar(numCuentaUsuario, deposito);
-        vistaBanco.depositoExitoso(numCuentaUsuario, depositoExitoso);
+        vistaBanco.depositoExitoso(consultarSaldo(numCuentaUsuario), depositoExitoso);
     }
 
     /**
@@ -148,7 +155,7 @@ public class Cajero implements ServicioBanco {
      */
     private void retirar(){
         //Pedimos los datos de la cuenta al usuario
-        long numCuentaRetiro = vistaBanco.pedirNumCuenta(true);
+        Long numCuentaRetiro = vistaBanco.pedirNumCuenta(true);
         int cvv = vistaBanco.pedirCVV();
         double retiro = vistaBanco.retiro();
         //tratamos de hacer el retiro

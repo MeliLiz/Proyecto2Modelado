@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * Método que representa a un un usuario de la tienda de libros
  */
-public class Usuario implements Observador {
+public class Usuario implements Observador, Serializable {
     private String nombreUsuario;
     private String contrasena;
-    private long cuentaBancaria;//El número de cuenta bancaria del usuario
+    private Long cuentaBancaria;//El número de cuenta bancaria del usuario
     private Biblioteca biblioteca;//La biblioteca del usuario
     private int numLibrosGratis = 0;//El número de libros gratis que tiene la tienda desde la última visita del usuario
 
@@ -14,7 +16,7 @@ public class Usuario implements Observador {
      * @param contrasena La contraseña del usuario
      * @param cuentaBancaria El numero de cuenta bancaria del usuario
      */
-    public Usuario(String usuario, String contrasena, long cuentaBancaria) {
+    public Usuario(String usuario, String contrasena, Long cuentaBancaria) {
         nombreUsuario = usuario;
         this.contrasena = contrasena;
         this.cuentaBancaria = cuentaBancaria;
@@ -63,9 +65,9 @@ public class Usuario implements Observador {
 
     /**
      * Método para obtener el número de cuenta bancaria del usuario
-     * @return long El número de cuenta bancaria del usuario
+     * @return Long El número de cuenta bancaria del usuario
      */
-    public long getNumeroDeCuenta() {
+    public Long getNumeroDeCuenta() {
         return this.cuentaBancaria;
     }
 

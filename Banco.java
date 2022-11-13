@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.Set;
@@ -5,7 +6,7 @@ import java.util.Set;
 /**
  * Clase que simula un banco
  */
-public class Banco implements ServicioBanco {
+public class Banco implements ServicioBanco, Serializable{
     private Hashtable<Long, CuentaBancaria> cuentas;
     private FabricaCuentas fabricaCuentas;
 
@@ -50,7 +51,7 @@ public class Banco implements ServicioBanco {
      * @param numCuenta El número de cuenta del que se quiere consultar el saldo
      * @return El saldo de la cuenta solicitada, -1 si la cuenta no existe
      */
-    public double consultarSaldo(long numCuenta) {
+    public double consultarSaldo(Long numCuenta) {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
@@ -70,7 +71,7 @@ public class Banco implements ServicioBanco {
      * @return boolean True si el depósito fue exitoso, false en otro caso
      */
     @Override
-    public boolean depositar(long numCuenta, double deposito) {
+    public boolean depositar(Long numCuenta, double deposito) {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
@@ -91,7 +92,7 @@ public class Banco implements ServicioBanco {
      * @return boolean True si el retiro fue exitoso, false en otro caso
      */
     @Override
-    public boolean retirar(long numCuenta, int cvv, double retiro) {
+    public boolean retirar(Long numCuenta, int cvv, double retiro) {
         if (verificarNumCuentaBancaria(numCuenta, cvv)) {
 
             return cuentas.get(numCuenta).retirar(retiro);
@@ -109,7 +110,7 @@ public class Banco implements ServicioBanco {
      * @param numCuentaDestino El numero de cuenta que recibirá el dinero
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
-    public boolean transferir(long numCuentaOrigen, int cvvOrigen, long numCuentaDestino, double cantidad) {
+    public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
         //Verificamos que el número de cuenta origen coincida con su cvv y verificamos que la cuenta destino exista
         if (verificarNumCuentaBancaria(numCuentaOrigen, cvvOrigen) && existeCuenta(numCuentaDestino)) {
             //Verificamos que se pueda retirar la cantidad deseada de la cuenta origen
@@ -126,7 +127,7 @@ public class Banco implements ServicioBanco {
      * @param cuenta El numero de cuenta a comprobar
      * @return boolean true si la cuenta existe, false en otro caso
      */
-    public boolean existeCuenta(long cuenta) {
+    public boolean existeCuenta(Long cuenta) {
         Set<Long> llaves = cuentas.keySet();
         for (Long llave : llaves) {
             if (llave.equals(cuenta)) {
@@ -144,7 +145,7 @@ public class Banco implements ServicioBanco {
      * @return boolean true si corresponde el numero de cuenta con el cvv, false en
      *         otro caso
      */
-    private boolean verificarNumCuentaBancaria(long numCuenta, int cvv) {
+    private boolean verificarNumCuentaBancaria(Long numCuenta, int cvv) {
         Set<Long> llaves = cuentas.keySet();
 
         for (Long llave : llaves) {
@@ -164,7 +165,7 @@ public class Banco implements ServicioBanco {
      * @param numCuenta El número de cuenta que queremos obtener
      * @return La cuenta que queríamos obtener
      */
-    public CuentaBancaria obtenerUnaCuenta(long numCuenta) {
+    public CuentaBancaria obtenerUnaCuenta(Long numCuenta) {
         if (existeCuenta(numCuenta)) {
             return cuentas.get(numCuenta);
         }

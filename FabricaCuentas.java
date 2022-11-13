@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Clase para crear una cuenta bancaria dependiendo de su tipo
  */
-public class FabricaCuentas {
+public class FabricaCuentas implements Serializable{
     
     /**
      * Constructor de una cuenta bancaria
@@ -11,7 +13,7 @@ public class FabricaCuentas {
      * @param cvv El cvv de la cuenta bancaria
      * @return CuentaBancaria La nueva cuenta dependiendo de su tipo
      */
-    public CuentaBancaria crearCuentaBancaria(String tipoCuenta, long numCuenta, String beneficiario, int cvv){
+    public CuentaBancaria crearCuentaBancaria(String tipoCuenta, Long numCuenta, String beneficiario, int cvv){
         CuentaBancaria cuenta=null;
         if(tipoCuenta.equals("basica")){
             cuenta=new CuentaBasica(beneficiario, numCuenta, cvv, 0);

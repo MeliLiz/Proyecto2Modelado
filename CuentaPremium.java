@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * Clase que simula una cuenta bancaria premium
  * Este tipo de cuenta no tiene restricciones en depósitos ni retiros
  */
-public class CuentaPremium extends CuentaBancaria {
+public class CuentaPremium extends CuentaBancaria implements Serializable{
 
     /**
      * Constructor

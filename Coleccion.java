@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * Clase que simula una coleccion de generos delibros
  */
-public class Coleccion implements Genero {
+public class Coleccion implements Genero, Serializable {
     private ArrayList<Genero> listaGeneros;
 
     /**
@@ -123,7 +124,7 @@ public class Coleccion implements Genero {
      */
     @Override
     public String toString() {
-        String toString = getNombre();
+        String toString = "\n"+getNombre()+"\n";
 
         for (Genero genero : listaGeneros) {
             toString += genero.getNombre();

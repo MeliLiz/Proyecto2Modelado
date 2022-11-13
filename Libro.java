@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Clase que representa un libro
  */
-public class Libro {
+public class Libro implements Serializable{
 
     private String nombre;//El título del libro
     private String autor;

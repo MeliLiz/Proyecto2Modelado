@@ -1,10 +1,11 @@
 import java.util.Iterator;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Clase que contiene a los llibros de género Literario
  */
-public class Literario implements Genero {
+public class Literario implements Genero, Serializable{
     private ArrayList<Libro> libros;
     private final String NOMBRE = "Literario";
 

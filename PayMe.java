@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * Clase para simular el sistema PayMe y poder conectar un negocio con el banco
  * para recibir pagos a través de cuentas bancarias
  */
-public class PayMe {
+public class PayMe implements Serializable{
     private Banco banco;
 
     /**
@@ -29,6 +31,14 @@ public class PayMe {
      */
     public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
         return banco.transferir(numCuentaOrigen, cvvOrigen, numCuentaDestino, cantidad);
+    }
+
+    /**
+     * Método para obtener el banco asociado al Pay;E
+     * @return Banco El banco asociado
+     */
+    public Banco getBanco(){
+        return banco;
     }
 
 }

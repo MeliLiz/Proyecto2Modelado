@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Clase de una cuenta básica
  * Esta cuenta tiene un límite de retiro y cobra un interés al depositar más de
  * una cantidad determinada
  */
-public class CuentaBasica extends CuentaBancaria {
+public class CuentaBasica extends CuentaBancaria implements Serializable{
     private double limiteDeRetiro;
     private double interesDeposito;
     private double pivoteInteres;// la cantidad de depósito a partir de la cual se cobra el interés

@@ -1,8 +1,10 @@
+import java.io.Serializable;
+
 /**
  * Clase de un administrador de la tienda de libros
  * Sirve para que el administrador pueda agregar libros a la colección de la tienda
  */
-public class Admin {
+public class Admin implements Serializable{
 
     private String nombre;//nombre de usuario
     private String contrasena;

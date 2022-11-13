@@ -1,10 +1,11 @@
 import java.util.Iterator;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Clase que contiene a los llibros de género NonFiction
  */
-public class NonFiction implements Genero{
+public class NonFiction implements Genero, Serializable{
     private ArrayList<Libro> libros;
     private final String NOMBRE = "NonFiction";
 
@@ -15,7 +16,7 @@ public class NonFiction implements Genero{
         libros = new ArrayList<Libro>();
         libros.add(new Libro("The truth bout Crypto", "Ric Edelman", "non-fiction", "https://drive.google.com/file/d/1h5ME4OGtW6-6KnWRi1h5cl1T-XdEah_A/view?usp=share_link", 421, 30, 7));
         libros.add(new Libro("Will", "Will Smith", "non-fiction", "https://drive.google.com/file/d/1eoXou1_XmxA2Nqsodi3Ea8h938B1NYa1/view?usp=share_link", 480, 25, 8));
-        libros.add(new Libro("The anrthropocene reviewed", "John Green", "non-fiction", "https://drive.google.com/file/d/1aQ1zNQDcBfTnajwhbVxYnjfdmTMFRxmG/view?usp=share_link", 298, 30, 8));
+        libros.add(new Libro("The anrthropocene reviewed", "John Green", "non-fiction", "https://drive.google.com/file/d/1aQ1zNQDcBfTnajwhbVxYnjfdmTMFRxmG/view?usp=share_link", 298, 30, 9));
 
 
     }

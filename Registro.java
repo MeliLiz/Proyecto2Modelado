@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Clase para registrar nuevos usuarioas en la tienda o iniciar sesión de un usuario
  */
-public class Registro {
+public class Registro implements Serializable{
 
     private Tienda tienda;
     private VistaRegistro vista;
@@ -48,13 +50,13 @@ public class Registro {
      */
     public void registrar(){
         String nombreUsuario=vista.pedirNombreUsuario();
-        //Se verifica que el nombre de usuario escogino no esté en uso todavía
+        //Se verifica que el nombre de usuario escogido no esté en uso todavía
         while(tienda.existeNombreUsuario(nombreUsuario)){
             vista.nombreUsuarioNoValido();
             nombreUsuario=vista.pedirNombreUsuario();
         }
         String contrasena=vista.pedirContrasena();
-        long numCuenta=vista.pedirCuentaBancaria();
+        Long numCuenta=vista.pedirCuentaBancaria();
         //Se verifica que la cuenta bancaria realmente existe en el banco
         while(!tienda.existeCuentaBancaria(numCuenta)){
             vista.numCuentaNoValido();
@@ -99,4 +101,6 @@ public class Registro {
     public void salir(){
         vista.despedida();
     }
+
+
 }

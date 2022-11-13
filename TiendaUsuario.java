@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Clase para la Tienda Usuario, sirve como controlador del usuario y la tienda
  */
-public class TiendaUsuario {
+public class TiendaUsuario implements Serializable {
     private Tienda tienda;
     private VistaMenus vistaMenus;
     private VistaTienda vistaTienda;
@@ -74,6 +75,7 @@ public class TiendaUsuario {
         switch (respuesta) {
             case 1:
                 mostrarCatalogo();
+                inicio();
                 break;
             case 2:
                 comprar();
@@ -179,6 +181,8 @@ public class TiendaUsuario {
                             vistaTienda.errorNumPaginas();
                         }else{
                             libro.setNumPaginasLeyendo(pagina);
+                            vistaTienda.progresoRegistrado();
+                            irABiblioteca();
                             break;
                         }
                     }
@@ -187,10 +191,11 @@ public class TiendaUsuario {
                     //Se cambia el estado del libro a "Leido"
                     biblioteca.addLibroLeido(libro);
                     libro.setEstadoLibro("Leido");
+                    irABiblioteca();
                     break;
                 case 4://Salir
                     //Regresamos al menu de opciones de la bibioteca del usuario
-                    irABiblioteca();
+                    inicio();
                     break;
             
                 default:
@@ -235,15 +240,17 @@ public class TiendaUsuario {
             //Se pide el id de un libro hasta que se ingrese el número -1
             do {
                 codigoDeBarras = vistaMenus.ingresarCodigoLibro();
-                //Se verifica que exista el libro con el id ingresado por el usuario
-                Libro libro = tienda.getLibro(codigoDeBarras);
-                if (libro != null) {
-                    argregarAlCarrito(libro);
-                    vistaTienda.libroAgregado(libro.getNombre());
-                } else {
-                    vistaTienda.noExisteLibro();
-
+                if(codigoDeBarras!=-1){
+                    //Se verifica que exista el libro con el id ingresado por el usuario
+                    Libro libro = tienda.getLibro(codigoDeBarras);
+                    if (libro != null) {
+                        argregarAlCarrito(libro);
+                        vistaTienda.libroAgregado(libro.getNombre());
+                    } else {
+                        vistaTienda.noExisteLibro();
+                    }
                 }
+                
             } while (codigoDeBarras != -1);
             //se muestra el menú para pagar
             vistaMenus.pagar();

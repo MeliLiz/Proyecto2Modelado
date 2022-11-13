@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.io.IOException;
+import java.io.Serializable;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -7,7 +8,7 @@ import java.net.URISyntaxException;
 /**
  * Clase que simula la bibliloteca de un usuario
  */
-public class Biblioteca {
+public class Biblioteca implements Serializable{
 
     private ArrayList<Libro> porLeer;
     private ArrayList<Libro> enProgreso;
