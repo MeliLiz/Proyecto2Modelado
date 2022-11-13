@@ -11,32 +11,32 @@ public class Main {
 
         Tienda tienda;
         Banco banco;
+        VistaMain vistaMain = new VistaMain();
         try {
             ObjectInputStream entrada = new ObjectInputStream(new FileInputStream("archivo.obj"));
             tienda = (Tienda) entrada.readObject();
-            banco=tienda.getPayMe().getBanco();
+            banco = tienda.getPayMe().getBanco();
             entrada.close();
         } catch (Exception e) {// Si el archivo no se pudo leer
-            System.out.println("Iniciando...");
-            banco=new Banco();
-            PayMe payme=new PayMe(banco);
-            
-            CuentaBancaria cuenta=banco.crearCuenta("Inkspace", "premium");
-            tienda=new Tienda(payme, cuenta.getNumCuenta());
-            Admin admin=new Admin(tienda, "Ethan", "x23_?Ae");
+            vistaMain.iniciar();
+            banco = new Banco();
+            PayMe payme = new PayMe(banco);
+
+            CuentaBancaria cuenta = banco.crearCuenta("Inkspace", "premium");
+            tienda = new Tienda(payme, cuenta.getNumCuenta());
+            Admin admin = new Admin(tienda, "Ethan", "x23_?Ae");
             tienda.registrarAdmin(admin);
-            System.out.println("se registro: "+tienda.getAdmin().getNombre()+" "+tienda.getAdmin().getContrasena());
 
         }
 
-        if(args[0].equals("Banco")){
-            Cajero cajero=new Cajero(banco);
+        if (args[0].equals("Banco")) {
+            Cajero cajero = new Cajero(banco);
             cajero.mostrarMenu();
-        }else if(args[0].equals("Tienda")){
-            Registro registro=new Registro(tienda);
+        } else if (args[0].equals("Tienda")) {
+            Registro registro = new Registro(tienda);
             registro.menuOpciones();
-        }else{
-            System.out.println("No se ingresaron argumentos");
+        } else {
+            vistaMain.errorArgumentos();
         }
 
         ObjectOutputStream escritor = null;
@@ -44,18 +44,18 @@ public class Main {
             escritor = new ObjectOutputStream(new FileOutputStream("archivo.obj"));
             escritor.writeObject(tienda);
         } catch (NotSerializableException e) {
-            System.out.println("Error en la grabación: " + e + ". Objeto no serializable");
+            vistaMain.errorEnSerializar(e);
         } catch (IOException e) {
-            System.out.println("Error en la grabación: " + e);
+            vistaMain.errorEnIO(e);
         } finally {
             if (escritor != null) {
-                System.out.println("Cerrando el programa");
+                vistaMain.cerrarPrograma();
                 try {
                     escritor.close();
                 } catch (IOException e) {
                 }
             } else {
-                System.out.println("No se abrió ningún archivo");
+                vistaMain.noSeAbrioArchivo();
             }
         }
     }
