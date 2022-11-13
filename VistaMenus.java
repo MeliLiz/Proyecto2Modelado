@@ -234,7 +234,7 @@ public class VistaMenus {
             System.out.println("2) Registrar progreso (página en la que te quedaste)");
             System.out.println("3) Marcar como leído");
             System.out.println("4) Salir");
-            System.out.println(VERDE + "Ingresa una opción: " + RESET);
+            System.out.print(VERDE + "Ingresa una opción: " + RESET);
 
             try {
                 respuesta = scanner2.nextInt();
@@ -265,7 +265,7 @@ public class VistaMenus {
             System.out.println("1) Educativo");
             System.out.println("2) Literario");
             System.out.println("3) Non-fiction");
-            System.out.println(VERDE + "Ingresa una opción: " + RESET);
+            System.out.print(VERDE + "Ingresa una opción: " + RESET);
 
             try {
                 respuesta = scanner2.nextInt();
