@@ -304,17 +304,27 @@ public class TiendaUsuario implements Serializable {
         // Mostramos los productos a pagar y el total a pagar
         vistaTienda.imprimirPago(this.carrito, suma);
         // Pedir datos bancarios del usuario
-        int cvvUsuario = vistaTienda.pedirDatosBancariosUsuario();
-        // Se verifica que se pueda hacer el pago
-        if (tienda.hacerPago(suma, usuario.getNumeroDeCuenta(), cvvUsuario)) {
-            vistaTienda.pagoExitoso();
-            // Ponemos los libros en la biblioteca del usuario
+        if(suma!=0){
+            int cvvUsuario = vistaTienda.pedirDatosBancariosUsuario();
+            // Se verifica que se pueda hacer el pago
+            if (tienda.hacerPago(suma, usuario.getNumeroDeCuenta(), cvvUsuario)) {
+                vistaTienda.pagoExitoso();
+                // Ponemos los libros en la biblioteca del usuario
+                for (Libro libro : carrito) {
+                    usuario.getBiblioteca().addLibro(libro);
+                }
+            } else {// Si el pago no se puede hacer
+                vistaTienda.pagoFallido();
+            }
+        }else if(!carrito.isEmpty()){
             for (Libro libro : carrito) {
+                vistaTienda.pagoExitoso();
                 usuario.getBiblioteca().addLibro(libro);
             }
-        } else {// Si el pago no se puede hacer
-            vistaTienda.pagoFallido();
+        }else{
+            vistaTienda.noHayLibrosEnCarrito();
         }
+       
         // Quitamos los libros del carrito y regresamos al inicio
         carrito.clear();
         inicio();

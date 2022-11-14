@@ -275,4 +275,11 @@ public class VistaTienda {
                 + MORADO + " libro(s) gratis en la tienda desde tu última visita!. Écha un vistazo! \n" + RESET);
     }
 
+    /**
+     * Método para indicar al usuario que no hay libros en su carrito
+     */
+    public void noHayLibrosEnCarrito(){
+        System.out.println("No se agregaron libros al carrito");
+    }
+
 }
