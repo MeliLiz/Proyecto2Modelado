@@ -106,6 +106,7 @@ public class Biblioteca implements Serializable{
      */
     public void addLibro(Libro nuevo){
         porLeer.add(nuevo);
+        nuevo.setEstadoLibro("Por leer");
     }
 
     /**
@@ -113,8 +114,16 @@ public class Biblioteca implements Serializable{
      * @param libro El libro que estará en progreso
      */
     public void addLibroEnProgreso(Libro libro){
-        enProgreso.add(libro);
+        if(!libro.getEstadoLibro().equals("En Progreso")){
+            enProgreso.add(libro);
+        }
+        //Si el libro está por leer, lo eliminamos de la lista de por leer
+        if(libro.getEstadoLibro().equals("Por leer")){
         porLeer.remove(libro);
+        }else if(libro.getEstadoLibro().equals("Leido")){ //Si el libro está leido, lo eliminamos de la lista de leídos
+            leidos.remove(libro);
+        } 
+        libro.setEstadoLibro("En progreso");
     }
 
     /**
@@ -122,7 +131,16 @@ public class Biblioteca implements Serializable{
      * @param libro El libro que estará en la lista de leidos
      */
     public void addLibroLeido(Libro libro){
-        leidos.add(libro);
-        enProgreso.remove(libro);
+        //Si el libro no está ya en la lista d4 elibros leidos, se agrega a la lista de leidos
+        if(!libro.getEstadoLibro().equals("Leido")){
+            leidos.add(libro);
+        }
+        //Si el libro está por leer, lo eliminamos de la lista de por leer
+        if(libro.getEstadoLibro().equals("Por leer")){
+            porLeer.remove(libro);
+        }else if(libro.getEstadoLibro().equals("En progreso")){ //Si el libro está en progreso, lo eliminamos de la lista en progreso
+            enProgreso.remove(libro);
+        } 
+        libro.setEstadoLibro("Leido");
     }
 }

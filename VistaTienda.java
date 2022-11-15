@@ -316,4 +316,11 @@ public class VistaTienda {
         System.out.println(CYAN + "Regresando al menu principal...\n" + RESET);
     }
 
+    /**
+     * Método para indicar que un libro se marcó como leído
+     */
+    public void libroMarcadoLeido(){
+        System.out.println(MORADO+"El libro ha sido marcado como leído"+RESET);
+    }
+
 }

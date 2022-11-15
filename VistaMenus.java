@@ -176,7 +176,7 @@ public class VistaMenus {
         System.out.println(CYAN + "Bienvenid@ a tu biblioteca" + RESET);
         ciclo: while (true) {
             System.out.println("Elige una opción");
-            System.out.println("1) Leer un libro");
+            System.out.println("1) Ir a un libro");
             System.out.println("2) Salir");
             System.out.print(VERDE + "Ingrese una opción: " + RESET);
             int respuesta = 0;
@@ -205,7 +205,7 @@ public class VistaMenus {
      */
     public void elegirLibro() {
         while (true) {
-            System.out.print(VERDE + "Ingresa el id del libro que deseas leer: " + RESET);
+            System.out.print(VERDE + "Ingresa el id del libro al que deseas ir: " + RESET);
             int id = 0;
             try {
                 id = scanner2.nextInt();

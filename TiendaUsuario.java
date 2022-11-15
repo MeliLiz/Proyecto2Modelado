@@ -179,11 +179,9 @@ public class TiendaUsuario implements Serializable {
             switch (respuesta) {
 
                 case 1:// Leer libro
-                       // Si el libro no se había abierto antes, se cambia el estado del libro a "En
-                       // progreso"
+                       // Si el libro no se había abierto antes, se cambia el estado del libro a "En progreso"
                     if (libro.getEstadoLibro().equals("Por leer")) {
                         biblioteca.addLibroEnProgreso(libro);
-                        libro.setEstadoLibro("En progreso");
                     }
                     // Sea abre el libro y se regresa al inicio
                     biblioteca.abrirLibro(libro);
@@ -197,6 +195,9 @@ public class TiendaUsuario implements Serializable {
                         if (pagina < 0 || pagina > libro.getNumPaginas()) {
                             vistaTienda.errorNumPaginas();
                         } else {
+                            if (libro.getEstadoLibro().equals("Por leer")) {
+                                biblioteca.addLibroEnProgreso(libro);
+                            }
                             libro.setNumPaginasLeyendo(pagina);
                             vistaTienda.progresoRegistrado();
                             irABiblioteca();
@@ -204,14 +205,12 @@ public class TiendaUsuario implements Serializable {
                         }
                     }
                     break;
-                case 3:// Marcar el libro como leido
-                       // Se cambia el estado del libro a "Leido"
+                case 3:// Marcar el libro como leido. Se cambia el estado del libro a "Leido"
                     biblioteca.addLibroLeido(libro);
-                    libro.setEstadoLibro("Leido");
+                    vistaTienda.libroMarcadoLeido();
                     irABiblioteca();
                     break;
-                case 4:// Salir
-                       // Regresamos al menu de opciones de la bibioteca del usuario
+                case 4:// Salir. Regresamos al menu de opciones de la bibioteca del usuario
                     inicio();
                     break;
 
