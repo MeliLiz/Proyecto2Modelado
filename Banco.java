@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Clase que simula un banco
  */
-public class Banco implements ServicioBanco, ConexionBancaria, Serializable{
+public class Banco implements ServicioBanco, ConexionBancaria, Serializable {
     private Hashtable<Long, CuentaBancaria> cuentas;
     private FabricaCuentas fabricaCuentas;
 
@@ -30,18 +30,18 @@ public class Banco implements ServicioBanco, ConexionBancaria, Serializable{
         if (numCuenta < 0) {
             numCuenta = numCuenta * -1;
         }
-        //verificamos que no exista el numero de cuenta
+        // verificamos que no exista el numero de cuenta
         while (existeCuenta(numCuenta)) {
             numCuenta = random.nextLong();
             if (numCuenta < 0) {
                 numCuenta = numCuenta * -1;
             }
         }
-        //Obtenemos un cvv
+        // Obtenemos un cvv
         int cvv = random.nextInt(899) + 100;
-        //Creamos la cuenta bancaria
+        // Creamos la cuenta bancaria
         CuentaBancaria cuenta = fabricaCuentas.crearCuentaBancaria(tipoCuenta, numCuenta, beneficiario, cvv);
-        cuentas.put(numCuenta, cuenta);//se registra la cuenta en el banco
+        cuentas.put(numCuenta, cuenta);// se registra la cuenta en el banco
         return cuenta;
     }
 
@@ -112,9 +112,10 @@ public class Banco implements ServicioBanco, ConexionBancaria, Serializable{
      */
     @Override
     public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
-        //Verificamos que el número de cuenta origen coincida con su cvv y verificamos que la cuenta destino exista
+        // Verificamos que el número de cuenta origen coincida con su cvv y verificamos
+        // que la cuenta destino exista
         if (verificarNumCuentaBancaria(numCuentaOrigen, cvvOrigen) && existeCuenta(numCuentaDestino)) {
-            //Verificamos que se pueda retirar la cantidad deseada de la cuenta origen
+            // Verificamos que se pueda retirar la cantidad deseada de la cuenta origen
             if (retirar(numCuentaOrigen, cvvOrigen, cantidad)) {
                 return cuentas.get(numCuentaDestino).depositar(cantidad);
             }
@@ -155,6 +156,23 @@ public class Banco implements ServicioBanco, ConexionBancaria, Serializable{
                 if (cuentas.get(llave).getCvv() != cvv) {
                     return false;
                 }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Metodo para verificar el cvv de una cuenta
+     * 
+     * @param cvv El cvv que se quiere verificar
+     * @return Si el cvv pasado por parametro existe 
+     */
+    public boolean verificarCvv(int cvv) {
+        Set<Long> llaves = cuentas.keySet();
+        for (Long llave : llaves) {
+            int cvvCuenta = cuentas.get(llave).getCvv();
+            if (cvvCuenta == cvv) {
                 return true;
             }
         }

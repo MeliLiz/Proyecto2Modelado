@@ -52,7 +52,7 @@ public class VistaBanco {
 
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresó un número, vuelva a intentarlo\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresó un número, vuelva a intentarlo\n" + RESET);
                 scanner2.next();
             }
         }
@@ -103,8 +103,8 @@ public class VistaBanco {
         int respuesta = 0;
         while (true) {
             System.out.println(CYAN + "¿Qué tipo de cuenta desea?" + RESET);
-            System.out.println("1) Basica: Límite de retiro y limite de deposito sin interés. $0");
-            System.out.println("2) Premium: Sin límites. $500");
+            System.out.println("1) Basica: Límite de retiro y limite de deposito con interés: 3% a partir de $2000");
+            System.out.println("2) Premium: Sin límites.");
             System.out.print(VERDE + "Elija una opción: " + RESET);
             try {
                 respuesta = scanner2.nextInt();
@@ -117,10 +117,10 @@ public class VistaBanco {
                     }
                     break;
                 } else {
-                    System.out.println(ROJO + "No ingreso una opción válida" + RESET);
+                    System.out.println(ROJO + "No ingreso una opción válida\n" + RESET);
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresó un número, vuelva a intentarlo" + RESET);
+                System.out.println(ROJO + "\nNo ingresó un número, vuelva a intentarlo\n" + RESET);
                 scanner2.next();
             }
         }
@@ -159,7 +159,7 @@ public class VistaBanco {
                 cuenta = scanner3.nextLong();
                 break;
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un numero\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un numero\n" + RESET);
                 scanner3.next();
             }
         }
@@ -192,7 +192,7 @@ public class VistaBanco {
      */
     private void mostrarError() {
         System.out.println(
-                ROJO + "Lo sentimos, no pudimos realizar la operación requerida con su cuenta, por favor revise el estado de su cuenta\n"
+                ROJO + "\nLo sentimos, no pudimos realizar la operación requerida con su cuenta, por favor revise el estado de su cuenta\n"
                         + RESET);
     }
 
@@ -201,7 +201,15 @@ public class VistaBanco {
      */
     public void mostrarErrorNumCuenta() {
         System.out.println(
-                ROJO + "Lo sentimos, el número de cuenta que ha ingresado no existe, intente de nuevo\n" + RESET);
+                ROJO + "\nLo sentimos, el número de cuenta que ha ingresado no existe, intente de nuevo\n" + RESET);
+    }
+
+    /**
+     * Método para mostrar error si el cvv ingreado por el usuario no existe
+     */
+    public void mostrarErrorCVV() {
+        System.out.println(
+                ROJO + "\nLo sentimos, el cvv que ha ingresado no existe, intente de nuevo\n" + RESET);
     }
 
     /**
@@ -298,7 +306,7 @@ public class VistaBanco {
                 System.out.println();
                 break;
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un numero" + RESET);
+                System.out.println(ROJO + "No ingresaste un numero\n" + RESET);
                 scanner2.next();
             }
         }

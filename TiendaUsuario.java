@@ -149,8 +149,15 @@ public class TiendaUsuario implements Serializable {
     public void verBiblioteca(int respuesta) {
         if (respuesta == 1) {
             Biblioteca biblioteca = usuario.getBiblioteca();
-            vistaTienda.mostrarLibrosBiblioteca(biblioteca);
-            vistaMenus.elegirLibro();
+            int contador = vistaTienda.mostrarLibrosBiblioteca(biblioteca);
+            if (contador >= 1) {
+                vistaMenus.elegirLibro();
+            } else {
+                vistaTienda.noHayLibrosEnBibliotecaUsuario();
+                inicio();
+
+            }
+
         } else {
             inicio();
         }
@@ -185,6 +192,7 @@ public class TiendaUsuario implements Serializable {
                 case 2:// Registrar la última página leída del libro
                     while (true) {
                         int pagina = vistaTienda.pedirPagina();
+
                         // Se verifica que la página ingresada sea válida para el libro
                         if (pagina < 0 || pagina > libro.getNumPaginas()) {
                             vistaTienda.errorNumPaginas();
@@ -304,27 +312,33 @@ public class TiendaUsuario implements Serializable {
         // Mostramos los productos a pagar y el total a pagar
         vistaTienda.imprimirPago(this.carrito, suma);
         // Pedir datos bancarios del usuario
-        if(suma!=0){
+        if (suma != 0) {
             int cvvUsuario = vistaTienda.pedirDatosBancariosUsuario();
-            // Se verifica que se pueda hacer el pago
-            if (tienda.hacerPago(suma, usuario.getNumeroDeCuenta(), cvvUsuario)) {
-                vistaTienda.pagoExitoso();
-                // Ponemos los libros en la biblioteca del usuario
-                for (Libro libro : carrito) {
-                    usuario.getBiblioteca().addLibro(libro);
+            if (tienda.getPayMe().getBanco().verificarCvv(cvvUsuario)) {
+                // Se verifica que se pueda hacer el pago
+                if (tienda.hacerPago(suma, usuario.getNumeroDeCuenta(), cvvUsuario)) {
+                    vistaTienda.pagoExitoso();
+                    // Ponemos los libros en la biblioteca del usuario
+                    for (Libro libro : carrito) {
+                        usuario.getBiblioteca().addLibro(libro);
+                    }
+                } else {// Si el pago no se puede hacer
+                    vistaTienda.pagoFallido();
                 }
-            } else {// Si el pago no se puede hacer
-                vistaTienda.pagoFallido();
+
+            } else {
+                vistaTienda.errorCVV();
             }
-        }else if(!carrito.isEmpty()){
+
+        } else if (!carrito.isEmpty()) {
             for (Libro libro : carrito) {
                 vistaTienda.pagoExitoso();
                 usuario.getBiblioteca().addLibro(libro);
             }
-        }else{
+        } else {
             vistaTienda.noHayLibrosEnCarrito();
         }
-       
+
         // Quitamos los libros del carrito y regresamos al inicio
         carrito.clear();
         inicio();

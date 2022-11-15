@@ -48,7 +48,7 @@ public class VistaMenus {
                     System.out.println(ROJO + "No ingresaste una opción válida\n" + RESET);
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
         }
@@ -77,7 +77,7 @@ public class VistaMenus {
                     System.out.println(ROJO + "No ingresaste una opción válida\n" + RESET);
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
 
@@ -109,7 +109,7 @@ public class VistaMenus {
                     System.out.println(ROJO + "No ingresaste una opción válida\n" + RESET);
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
         }
@@ -163,7 +163,7 @@ public class VistaMenus {
 
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ha ingreado un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ha ingreado un número\n" + RESET);
                 scanner2.next();
             }
         }
@@ -178,7 +178,7 @@ public class VistaMenus {
             System.out.println("Elige una opción");
             System.out.println("1) Leer un libro");
             System.out.println("2) Salir");
-            System.out.println(VERDE + "Ingrese una opción: " + RESET);
+            System.out.print(VERDE + "Ingrese una opción: " + RESET);
             int respuesta = 0;
             try {
                 respuesta = scanner2.nextInt();
@@ -194,7 +194,7 @@ public class VistaMenus {
 
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
         }
@@ -245,7 +245,7 @@ public class VistaMenus {
                     System.out.println(ROJO + "No ingresaste una opción válida\n" + RESET);
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
         }
@@ -286,9 +286,10 @@ public class VistaMenus {
                     scanner2.next();
                 }
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
                 scanner2.next();
             }
         }
     }
+
 }
