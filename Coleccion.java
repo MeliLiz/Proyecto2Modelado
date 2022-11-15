@@ -124,10 +124,12 @@ public class Coleccion implements Genero, Serializable {
      */
     @Override
     public String toString() {
-        String toString = "\n"+getNombre()+"\n";
+        String AZUL = "\u001B[34m";
+        String RESET = "\033[0m";
+        String toString = "\n"+AZUL+getNombre()+RESET+"\n";
 
         for (Genero genero : listaGeneros) {
-            toString += genero.getNombre();
+            toString += "\n"+AZUL+genero.getNombre()+RESET+"\n";
             toString += genero.toString();
         }
         return toString;
