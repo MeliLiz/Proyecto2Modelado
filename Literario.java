@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase que contiene a los llibros de género Literario
  */
-public class Literario implements Genero, Serializable{
+public class Literario extends Genero implements Serializable{
     private ArrayList<Libro> libros;
     private final String NOMBRE = "Literario";
 

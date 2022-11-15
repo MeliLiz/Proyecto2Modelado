@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Clase que contiene a los llibros de género NonFiction
  */
-public class NonFiction implements Genero, Serializable{
+public class NonFiction extends Genero implements Serializable{
     private ArrayList<Libro> libros;
     private final String NOMBRE = "NonFiction";
 

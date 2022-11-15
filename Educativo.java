@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Clase que contiene a los llibros de género educativo
  */
-public class Educativo implements Genero, Serializable {
+public class Educativo extends Genero implements Serializable {
     private ArrayList<Libro> libros;
     private final String NOMBRE = "Educativo";
 

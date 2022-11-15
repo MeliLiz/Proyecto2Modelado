@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Clase que simula una coleccion de generos delibros
  */
-public class Coleccion implements Genero, Serializable {
+public class Coleccion extends Genero implements Serializable{
     private ArrayList<Genero> listaGeneros;
 
     /**
