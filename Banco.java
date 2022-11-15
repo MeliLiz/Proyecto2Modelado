@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Clase que simula un banco
  */
-public class Banco implements ServicioBanco, Serializable{
+public class Banco implements ServicioBanco, ConexionBancaria, Serializable{
     private Hashtable<Long, CuentaBancaria> cuentas;
     private FabricaCuentas fabricaCuentas;
 
@@ -110,6 +110,7 @@ public class Banco implements ServicioBanco, Serializable{
      * @param numCuentaDestino El numero de cuenta que recibirá el dinero
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
+    @Override
     public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
         //Verificamos que el número de cuenta origen coincida con su cvv y verificamos que la cuenta destino exista
         if (verificarNumCuentaBancaria(numCuentaOrigen, cvvOrigen) && existeCuenta(numCuentaDestino)) {
@@ -127,6 +128,7 @@ public class Banco implements ServicioBanco, Serializable{
      * @param cuenta El numero de cuenta a comprobar
      * @return boolean true si la cuenta existe, false en otro caso
      */
+    @Override
     public boolean existeCuenta(Long cuenta) {
         Set<Long> llaves = cuentas.keySet();
         for (Long llave : llaves) {

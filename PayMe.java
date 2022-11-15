@@ -4,7 +4,7 @@ import java.io.Serializable;
  * Clase para simular el sistema PayMe y poder conectar un negocio con el banco
  * para recibir pagos a través de cuentas bancarias
  */
-public class PayMe implements Serializable{
+public class PayMe implements ConexionBancaria, Serializable{
     private Banco banco;
 
     /**
@@ -20,6 +20,7 @@ public class PayMe implements Serializable{
      * 
      * @return boolean true si existe la cuenta, false en otro caso
      */
+    @Override
     public boolean existeCuenta(Long numCuenta) {
         return banco.existeCuenta(numCuenta);
     }
@@ -29,6 +30,7 @@ public class PayMe implements Serializable{
      * 
      * @return boolean true si la transferencia fue exitosa, false en otro caso
      */
+    @Override
     public boolean transferir(Long numCuentaOrigen, int cvvOrigen, Long numCuentaDestino, double cantidad) {
         return banco.transferir(numCuentaOrigen, cvvOrigen, numCuentaDestino, cantidad);
     }
