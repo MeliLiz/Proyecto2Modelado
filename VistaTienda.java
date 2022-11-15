@@ -99,14 +99,24 @@ public class VistaTienda {
      */
     public void pagoExitoso() {
         System.out.println(CYAN + "Su compra se ha realizado con exito" + RESET);
-        System.out.println(CYAN + "Puede empezar a leer sus libros ingresando a la bliblioteca\n" + RESET);
+        System.out.println(CYAN + "Puede empezar a leer sus libros ingresando a su bliblioteca\n" + RESET);
     }
 
     /**
      * Método para notificar de un pago fallido
      */
     public void pagoFallido() {
-        System.out.println(ROJO + "Error al ingresar su cvv, su compra ha sido cancelada" + RESET);
+        System.out.println(
+                ROJO + "Ha ocurrido un error en el pago, revise el estado de su cuenta, su compra ha sido cancelada"
+                        + RESET);
+        System.out.println(VERDE + "Regresando al menu principal...\n" + RESET);
+    }
+
+    /**
+     * Método para mandar un error cuando el usuario ingresa un cvv erroneo
+     */
+    public void errorCVV() {
+        System.out.println(ROJO + "\nEL cvv que ingresó no existe,su compra ha sido cancelada" + RESET);
         System.out.println(CYAN + "Regresando al menu principal...\n" + RESET);
     }
 
@@ -114,12 +124,16 @@ public class VistaTienda {
      * Método para mostrar los datos de los libros que están en la biblioteca
      * 
      * @param biblioteca La biblioteca del usuario
+     * @return Un contador que ve si al menos una lista no esta vacia
      */
-    public void mostrarLibrosBiblioteca(Biblioteca biblioteca) {
+    public int mostrarLibrosBiblioteca(Biblioteca biblioteca) {
         ArrayList<Libro> libros = biblioteca.getPorLeer();
+        int contadorLibrosLLenos = 0; // para contar si cada lista de libros tiene al menos un libro
         if (libros.size() == 0) {
-            imprimirLibros(libros, CYAN + "***Por leer***\n" + RESET + "\nNo hay libros en esta sección");
+            imprimirLibros(libros,
+                    CYAN + "***Por leer***\n" + RESET + ROJO + "\nNo hay libros en esta sección\n" + RESET);
         } else {
+            contadorLibrosLLenos++;
             imprimirLibros(libros, CYAN + "***Por leer***" + RESET);
         }
 
@@ -128,6 +142,7 @@ public class VistaTienda {
             imprimirLibros(libros,
                     CYAN + "***En progreso***\n" + RESET + ROJO + "\nNo hay libros en esta sección\n" + RESET);
         } else {
+            contadorLibrosLLenos++;
             imprimirLibros(libros, CYAN + "***En progreso***" + RESET);
         }
 
@@ -136,8 +151,20 @@ public class VistaTienda {
             imprimirLibros(libros,
                     CYAN + "***Leídos***\n" + RESET + ROJO + "\nNo hay libros en esta sección\n" + RESET);
         } else {
+            contadorLibrosLLenos++;
             imprimirLibros(libros, CYAN + "***Leídos***" + RESET);
         }
+
+        return contadorLibrosLLenos;
+
+    }
+
+    /***
+     * Método para mosttar que el usuario no tiene libros en su biblioteca
+     */
+    public void noHayLibrosEnBibliotecaUsuario() {
+        System.out.println(CYAN + "\nNo tienes ningun libro en tu biblioteca\n" + RESET);
+        System.out.println(VERDE + "Regresando al menú principal...\n" + RESET);
     }
 
     /**
@@ -163,16 +190,22 @@ public class VistaTienda {
      * @return int El número de página ingresada por el usuario
      */
     public int pedirPagina() {
-        System.out.print(VERDE + "Ingresa la página en la que te quedaste: " + RESET);
+
         int pagina = 0;
         while (true) {
+            System.out.print(VERDE + "Ingresa la página en la que te quedaste: " + RESET);
             try {
                 pagina = scanner2.nextInt();
-                return pagina;
+                System.out.println();
+                break;
+
             } catch (Exception e) {
-                System.out.println(ROJO + "No ingresaste un número\n" + RESET);
+                System.out.println(ROJO + "\nNo ingresaste un número\n" + RESET);
+                scanner2.next();
+
             }
         }
+        return pagina;
     }
 
     /**
@@ -278,8 +311,9 @@ public class VistaTienda {
     /**
      * Método para indicar al usuario que no hay libros en su carrito
      */
-    public void noHayLibrosEnCarrito(){
-        System.out.println("No se agregaron libros al carrito");
+    public void noHayLibrosEnCarrito() {
+        System.out.println(ROJO + "No se agregaron libros al carrito" + RESET);
+        System.out.println(CYAN + "Regresando al menu principal...\n" + RESET);
     }
 
 }

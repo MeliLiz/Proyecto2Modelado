@@ -13,7 +13,6 @@ public class Tienda implements SujetoObservable, Serializable {
     Long cuentaBancaria;
     int numLibros;
 
-
     /**
      * Constructor
      */
@@ -24,16 +23,6 @@ public class Tienda implements SujetoObservable, Serializable {
         payMe = payme;
         cuentaBancaria = numCuenta;
         numLibros = coleccion.getNumLibros();
-    }
-
-    public Admin getAdmin(){
-        Set<String> llaves = admin.keySet();
-        for (String llave : llaves) {
-            if (llave.equals("Ethan") && admin.get(llave).getContrasena().equals("x23_?Ae")) {
-                return admin.get(llave);
-            }
-        }
-        return null;
     }
 
     /**
@@ -114,6 +103,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para registrar a un cliente
+     * 
      * @param El usuario a registrar
      */
     @Override
@@ -125,6 +115,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para remover a un cliente
+     * 
      * @param usuario El usuario a quitar del registro
      */
     @Override
@@ -146,6 +137,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para registrar a un nuevo administrador de la tienda
+     * 
      * @param nuevoAdmin El nuevo administrador de la tienda
      */
     public void registrarAdmin(Admin nuevoAdmin) {
@@ -154,6 +146,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para obtener a un usuario registrado
+     * 
      * @param nombreUsuario El nombre del usuario
      * @return El usuario registrado, null si el usuario no está registrado
      */
@@ -169,6 +162,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para mostrar la colección de libros disponibles
+     * 
      * @return String Los datos de los libros en la colección
      */
     public String mostrarCatalogo() {
@@ -177,6 +171,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para obtener un libro de la coleccion
+     * 
      * @param id El número de identificador del libro
      * @return El libro buscado, null si el id no corresponde a algún libro
      */
@@ -186,6 +181,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para obtener el número de libros que tiene la tienda
+     * 
      * @return
      */
     public int getNumLibros() {
@@ -194,6 +190,7 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para asignar el número de libros que tiene la tienda
+     * 
      * @param numLibros El número de libros en la colección de libros de la tienda
      */
     public void setNumLibros(int numLibros) {
@@ -202,22 +199,25 @@ public class Tienda implements SujetoObservable, Serializable {
 
     /**
      * Método para agregar un libro a la colección de libros
+     * 
      * @param libro El libro a agregar a la colección
      */
-    public void addLibro(Libro libro){
+    public void addLibro(Libro libro) {
         coleccion.addLibro(libro);
-        numLibros+=1;
-        //Si el libro registrado es gratis, notificamos a los usuarios que hay un libro nuevo gratis
-        if(libro.getPrecio()==0){
+        numLibros += 1;
+        // Si el libro registrado es gratis, notificamos a los usuarios que hay un libro
+        // nuevo gratis
+        if (libro.getPrecio() == 0) {
             notificar();
         }
     }
 
     /**
      * Método para obtener el sistema PayMe de la tienda
+     * 
      * @return
      */
-    public PayMe getPayMe(){
+    public PayMe getPayMe() {
         return payMe;
     }
 }
