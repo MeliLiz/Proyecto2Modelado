@@ -264,8 +264,10 @@ public class VistaTienda {
         while (true) {
             System.out.print(VERDE + "Ingresa el numero de páginas: " + RESET);
             try {
+                numPaginas = scanner1.nextInt();
                 System.out.println();
                 return numPaginas;
+
             } catch (Exception e) {
                 System.out.println(ROJO + "No ingresaste un número\n" + RESET);
             }
@@ -319,8 +321,8 @@ public class VistaTienda {
     /**
      * Método para indicar que un libro se marcó como leído
      */
-    public void libroMarcadoLeido(){
-        System.out.println(MORADO+"El libro ha sido marcado como leído"+RESET);
+    public void libroMarcadoLeido() {
+        System.out.println(MORADO + "El libro ha sido marcado como leído" + RESET);
     }
 
 }
